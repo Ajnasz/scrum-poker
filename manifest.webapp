@@ -1,0 +1,16 @@
+{
+  "name": "Scrum poker",
+  "description": "App for estimations",
+  "version": "1.0.0",
+  "launch_path": "/tests/scrum-poker/index.html",
+  "fullscreen": "true",
+  "appcache_path": "/tests/scrum-poker/scrumpoker.appcache",
+  "icons": {
+    "128": "/tests/scrum-poker/images/icon-128.png"
+  },
+  "developer": {
+    "name": "Lajos Koszti",
+    "url": "http://ajnasz.hu"
+  },
+  "default_locale": "en"
+}

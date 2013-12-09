@@ -15,7 +15,6 @@ body {
     padding: 0;
 }
 #PokerPlace {
-    padding: 5px;
 }
 #PokerPlace:after {
     content: '.';
@@ -51,9 +50,8 @@ body {
 }
 .displayed-card {
     position: fixed;
-    top: 0;
-    left: 50%;
-    margin-left: -50px;
+    top: -50%;
+    left: -50%;
     z-index: 1;
     visibility: hidden;
     opacity: 0;
@@ -66,6 +64,10 @@ body {
     -webkit-transition: opacity 0.5s,
                         visibility 0.2s,
                         margin-left 1s,
+                        top 1s,
+                        left 1s,
+                        margin-top 1s,
+                        border-width 1s,
                         width 1s,
                         height 1s,
                         font-size 1s,
@@ -74,6 +76,10 @@ body {
        -moz-transition: opacity 0.5s,
                         visibility 0.2s,
                         margin-left 1s,
+                        top 1s,
+                        left 1s,
+                        margin-top 1s,
+                        border-width 1s,
                         width 1s,
                         height 1s,
                         font-size 1s,
@@ -82,6 +88,10 @@ body {
         -ms-transition: opacity 0.5s,
                         visibility 0.2s,
                         margin-left 1s,
+                        top 1s,
+                        left 1s,
+                        margin-top 1s,
+                        border-width 1s,
                         width 1s,
                         height 1s,
                         font-size 1s,
@@ -90,6 +100,10 @@ body {
             transition: opacity 0.5s,
                         visibility 0.2s,
                         margin-left 1s,
+                        top 1s,
+                        left 1s,
+                        margin-top 1s,
+                        border-width 1s,
                         width 1s,
                         height 1s,
                         font-size 1s,
@@ -100,11 +114,19 @@ body {
     width: 250px;
     height: 375px;
     z-index: 3;
+    left: 50%;
     line-height: 375px;
     font-size: 120px;
     visibility: visible;
-    margin-left: -150px;
+    margin-left: -125px;
     opacity: 1;
+}
+.small-card {
+    opacity: 1;
+    transition: opacity 1s;
+}
+.show-in-big .small-card {
+    opacity: 0.3;
 }
 .card-side {
     font-family: 'FireSans';
@@ -141,8 +163,10 @@ body {
         font-size: 100px;
         height: 275px;
         line-height: 275px;
-        margin-left: -137px;
+        margin-left: -105px;
         width: 190px;
+        top: 50%;
+        margin-top: -133px;
     }
 }
 @media (min-height: 360px) {
@@ -156,8 +180,10 @@ body {
         font-size: 100px;
         line-height: 315px;
         height: 315px;
-        margin-left: -157px;
+        margin-left: -125px;
         width: 230px;
+        top: 50%;
+        margin-top: -158px;
     }
 }
 @media (min-height: 760px) {
@@ -168,10 +194,13 @@ body {
         width: 140px;
     }
     .show-in-big .displayed-card {
+        border-width: 20px;
         font-size: 180px;
         line-height: 525px;
         height: 525px;
-        margin-left: -167px;
+        margin-left: -195px;
         width: 350px;
+        top: 50%;
+        margin-top: -263px;
     }
 }

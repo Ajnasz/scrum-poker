@@ -2,6 +2,8 @@
 (function () {
     "use strict";
 
+    var place, createCard;
+
     function byId(id) {
         return document.getElementById(id);
     }
@@ -33,12 +35,40 @@
     }
 
     function hideDisplayedCard() {
-        byId('PokerPlace').classList.remove('show-in-big');
+        place.classList.remove('show-in-big');
     }
 
+    createCard = (function () {
+        var div = document.createElement('div'),
+            cardSide = div.cloneNode(false),
+            card = div.cloneNode(false),
+            front,
+            back;
+
+        cardSide.classList.add('card-side');
+        card.classList.add('card', 'small-card');
+
+        front = cardSide.cloneNode(true);
+        back = cardSide.cloneNode(true);
+
+        front.classList.add('front');
+        back.classList.add('back');
+
+        return function createCard(value) {
+            var output = card.cloneNode(true),
+                frontCard;
+            frontCard = front.cloneNode(true);
+            frontCard.textContent = value;
+            output.appendChild(frontCard);
+            output.appendChild(back.cloneNode(true));
+            output.dataset.value = value;
+
+            return output;
+        };
+    }());
+
     function showDisplayedCard(value) {
-        var card = byId('DisplayedCard'),
-            place = byId('PokerPlace');
+        var card = byId('DisplayedCard');
 
         hideDisplayedCard();
 
@@ -48,20 +78,59 @@
         }, 200);
     }
 
+    function removeCard(card) {
+        place.removeChild(card);
+    }
+
+    function removeCards() {
+        var cards = Array.prototype.slice.call(place.querySelectorAll('.card:not(.displayed-card)'));
+
+        cards.forEach(removeCard);
+    }
+
+    function addCards(cards) {
+        var fragment = document.createDocumentFragment();
+        cards.forEach(function (val) {
+            fragment.appendChild(createCard(val));
+        });
+
+        place.appendChild(fragment);
+    }
+
+    function showClickedCard(cardElem) {
+        var value;
+
+        if (cardElem) {
+            value = cardElem.dataset.value;
+            showDisplayedCard(value);
+        }
+    }
+
+    function onPlaceClick(event) {
+        var cardElem;
+
+        if (place.classList.contains('show-in-big')) {
+            place.classList.remove('show-in-big');
+        } else {
+            cardElem = getCardElem(event.target);
+            showClickedCard(cardElem);
+        }
+
+
+
+    }
+
+
 
     listen(window, 'load', function () {
-        listen(byId('PokerPlace'), 'click', function (event) {
-            var cardElem = getCardElem(event.target), value;
+        place = byId('PokerPlace');
 
-            if (cardElem) {
-                value = cardElem.dataset.value;
-                showDisplayedCard(value);
-            }
-        });
+        removeCards();
+        addCards([0, 1, 2, 3, 5, 8, 13, 20, 40, 100]);
 
-        listen(byId('DisplayedCard'), 'click', function () {
-            byId('PokerPlace').classList.remove('show-in-big');
-        });
+        listen(place, 'click', onPlaceClick);
+
+        listen(byId('DisplayedCard'), 'click', hideDisplayedCard);
     }, false);
 }());
 

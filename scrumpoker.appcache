@@ -1,0 +1,13 @@
+CACHE MANIFEST
+# v1 - 2013-12-09 22:59
+style.css
+script.js
+fonts/FiraSans-Regular.woff
+
+# Download everything if online
+NETWORK:
+*
+
+# Load this page if no content
+FALLBACK:
+/ offline.html
