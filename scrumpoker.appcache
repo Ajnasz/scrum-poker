@@ -1,8 +1,9 @@
 CACHE MANIFEST
-# v1 - 2013-12-09 22:59
+# v1 - 2013-12-10 12:11
 style.css
 script.js
 fonts/FiraSans-Regular.woff
+images/CoffeeCup.svg
 
 # Download everything if online
 NETWORK:
