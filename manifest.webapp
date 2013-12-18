@@ -2,11 +2,16 @@
   "name": "Scrum poker",
   "description": "App for estimations",
   "version": "1.0.0",
-  "launch_path": "/tests/scrum-poker/index.html",
+  "launch_path": "/index.html",
   "fullscreen": "true",
-  "appcache_path": "/tests/scrum-poker/scrumpoker.appcache",
+  "appcache_path": "/scrumpoker.appcache",
   "icons": {
-    "128": "/tests/scrum-poker/images/icon-128.png"
+    "256": "/images/icon-256.png",
+    "128": "/images/icon-128.png",
+    "120": "/images/icon-120.png",
+    "90": "/images/icon-90.png",
+    "60": "/images/icon-60.png",
+    "32": "/images/icon-32.png"
   },
   "developer": {
     "name": "Lajos Koszti",
