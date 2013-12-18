@@ -9,6 +9,7 @@
         FRONT_CARD_CLASS_NAME = 'front',
         BACK_CARD_CLASS_NAME = 'back',
         CARD_SIDE_CLASS_NAME = 'card-side',
+        showing = false,
         place;
 
     function byId(id) {
@@ -70,8 +71,26 @@
         };
     }
 
+    function fibonacci(test, acc) {
+        var val;
+
+        if (acc.length < 2) {
+            val = 1;
+        } else {
+            val = acc[acc.length - 2] + acc[acc.length - 1];
+        }
+
+        if (test(val)) {
+            acc.push(val);
+
+            return fibonacci(test, acc);
+        }
+
+        return acc;
+    }
+
     function processDisplayedValue(value) {
-        if (value === 0.5) {
+        if (+value === 0.5) {
             value = '1/2';
         } else if (value === 'coffe') {
             value = '<img src="images/CoffeeCup.svg" alt="coffee" />';
@@ -82,7 +101,9 @@
     function createElement(name, classes, data, attributes, text) {
         var element = document.createElement(name);
 
-        element.classList.add.apply(element.classList, classes);
+        classes.forEach(function (cn) {
+            element.classList.add(cn);
+        });
         data.forEach(setData(element));
         attributes.forEach(setAttributes(element));
 
@@ -131,7 +152,7 @@
     }
 
     function removeCards() {
-        var cards = toArray(place.querySelectorAll('.card:not(.' + BIG_CARD_CLASS_NAME + ')'));
+        var cards = toArray(place.querySelectorAll('.' + CARD_CLASS_NAME + ':not(.' + BIG_CARD_CLASS_NAME + ')'));
 
         cards.forEach(removeCard);
     }
@@ -158,6 +179,13 @@
     function onPlaceClick(event) {
         var cardElem;
 
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (showing) {
+            return;
+        }
+
         if (place.classList.contains(SHOW_CARD_IN_BIG_CLASS_NAME)) {
             place.classList.remove(SHOW_CARD_IN_BIG_CLASS_NAME);
         } else {
@@ -167,15 +195,40 @@
                 showClickedCard(cardElem);
             }
         }
+
+        showing = true;
+
+        setTimeout(function () {
+            showing = false;
+        }, 200);
+    }
+
+    function getFibonacciCards() {
+        return fibonacci(function (last) {
+            return last < 100; // generate fibonacci until last item is less then 100
+        }, [0]).reduce(function (prev, current, index, array) {
+            var arr = prev || [prev];
+
+            if (arr.indexOf(current) === -1) {
+                return arr.concat(current);
+            }
+
+            return arr;
+        });
+    }
+
+    function getCommercialCards() {
+        return ['coffe', '?', 0.5, 0, 1, 2, 3, 5, 8, 13, 20, 40, 100];
     }
 
     listen(window, 'load', function () {
         place = byId('PokerPlace');
 
         removeCards();
-        addCards(['coffe', '?', 0.5, 0, 1, 2, 3, 5, 8, 13, 20, 40, 100]);
+        addCards(getCommercialCards());
 
         listen(place, 'click', onPlaceClick);
+        listen(place, 'touchend', onPlaceClick);
 
         listen(byId('DisplayedCard'), 'click', hideDisplayedCard);
     }, false);

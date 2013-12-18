@@ -51,59 +51,39 @@ body {
 }
 .big-card {
     position: fixed;
-    top: -50%;
+    top: -110%;
     left: 50%;
     z-index: 1;
-    visibility: hidden;
-    opacity: 0;
     margin-right: 0;
+    opacity: 0;
 
-	-webkit-transform-style: preserve-3d;
-	   -moz-transform-style: preserve-3d;
-	    -ms-transform-style: preserve-3d;
-	        transform-style: preserve-3d;
+    -webkit-transform: translateZ(0);
+       -moz-transform: translateZ(0);
+        -ms-transform: -translateZ(0);
+            transform: translateZ(0);
+
 
     -webkit-transition: opacity 0.5s,
-                        visibility 0.2s,
-                        margin-left 0.5s,
                         top 0.5s,
-                        left 0.5s,
-                        margin-top 0.5s,
-                        border-width 0.5s,
-                        -webkit-transform 0.5s;
+                        margin-top 0.5s;
        -moz-transition: opacity 0.5s,
-                        visibility 0.2s,
                         top 0.5s,
-                        left 0.5s,
-                        margin-left 0.5s,
-                        margin-top 0.5s,
-                        border-width 0.5s,
-                        -moz-transform 0.5s;
+                        margin-top 0.5s;
         -ms-transition: opacity 0.5s,
-                        visibility 0.2s,
                         top 0.5s,
-                        left 0.5s,
-                        margin-left 0.5s,
-                        margin-top 0.5s,
-                        border-width 0.5s,
-                        -ms-transform 0.5s;
+                        margin-top 0.5s;
             transition: opacity 0.5s,
-                        visibility 0.2s,
                         top 0.5s,
-                        left 0.5s,
-                        margin-left 0.5s,
-                        margin-top 0.5s,
-                        transform 0.5s;
+                        margin-top 0.5s;
 }
 .show-in-big .big-card {
-    z-index: 3;
-    visibility: visible;
     opacity: 1;
+    z-index: 3;
 }
 .small-card {
     margin: 10px;
     opacity: 1;
-    transition: opacity 1s;
+    transition: opacity 1s 0.4s;
 }
 .show-in-big .small-card {
     opacity: 0.3;
