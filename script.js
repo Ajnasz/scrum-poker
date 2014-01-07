@@ -10,6 +10,7 @@
         BACK_CARD_CLASS_NAME = 'back',
         CARD_SIDE_CLASS_NAME = 'card-side',
         showing = false,
+        placeClickEnabled = true,
         place;
 
     function byId(id) {
@@ -203,6 +204,15 @@
         }, 200);
     }
 
+
+    function disablePlaceClick() {
+        placeClickEnabled = false;
+    }
+
+    function enablePlaceClick() {
+        placeClickEnabled = true;
+    }
+
     function getFibonacciCards() {
         return fibonacci(function (last) {
             return last < 100; // generate fibonacci until last item is less then 100
@@ -228,6 +238,9 @@
         addCards(getCommercialCards());
 
         listen(place, 'click', onPlaceClick);
+        listen(place, 'click', enablePlaceClick);
+        listen(place, 'touchstart', enablePlaceClick);
+        listen(place, 'touchmove', disablePlaceClick);
         listen(place, 'touchend', onPlaceClick);
 
         listen(byId('DisplayedCard'), 'click', hideDisplayedCard);
