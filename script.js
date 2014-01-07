@@ -179,18 +179,30 @@
         }
     }
 
+    function cardChangeDisabled() {
+        return showing || !placeClickEnabled;
+    }
+
+    function isBigCardVisible() {
+        return place.classList.contains(SHOW_CARD_IN_BIG_CLASS_NAME);
+    }
+
+    function hideBigCard() {
+        place.classList.remove(SHOW_CARD_IN_BIG_CLASS_NAME);
+    }
+
     function onPlaceClick(event) {
         var cardElem;
 
         event.preventDefault();
         event.stopPropagation();
 
-        if (showing) {
+        if (cardChangeDisabled()) {
             return;
         }
 
-        if (place.classList.contains(SHOW_CARD_IN_BIG_CLASS_NAME)) {
-            place.classList.remove(SHOW_CARD_IN_BIG_CLASS_NAME);
+        if (isBigCardVisible()) {
+            hideBigCard();
         } else {
             cardElem = getCardElem(event.target);
 
