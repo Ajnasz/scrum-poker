@@ -95,6 +95,8 @@
             value = '1/2';
         } else if (value === 'coffe') {
             value = '<img src="images/CoffeeCup.svg" alt="coffee" />';
+        } else if (+value === Infinity) {
+            value = '&#8734;';
         }
         return String(value);
     }
@@ -228,7 +230,7 @@
     }
 
     function getCommercialCards() {
-        return ['coffe', '?', 0.5, 0, 1, 2, 3, 5, 8, 13, 20, 40, 100];
+        return ['coffe', '?', 0, 0.5, 1, 2, 3, 5, 8, 13, 20, 40, 100, Infinity];
     }
 
     listen(window, 'load', function () {
