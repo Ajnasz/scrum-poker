@@ -58,12 +58,27 @@
 
     function setData(element) {
         function setElementData(name, value) {
-            element.dataset[name] = value;
+            if (element.dataset) {
+                element.dataset[name] = value;
+            } else {
+                element.setAttribute('data-' + name, value);
+            }
         }
 
         return function (data) {
             setElementData.apply(element, data);
         };
+    }
+
+    function getData(element, name) {
+        var output;
+        if (element.dataset) {
+            output = element.dataset[name];
+        } else {
+            output = element.getAttribute('data-' + name);
+        }
+
+        return output;
     }
 
     function setAttributes(element) {
@@ -174,7 +189,7 @@
         var value;
 
         if (cardElem) {
-            value = cardElem.dataset.value;
+            value = getData(cardElem, 'value');
             showDisplayedCard(value);
         }
     }
@@ -247,15 +262,16 @@
 
     listen(window, 'load', function () {
         place = byId('PokerPlace');
+        var body = document.getElementsByTagName('body')[0];
 
         removeCards();
         addCards(getCommercialCards());
 
-        listen(place, 'click', onPlaceClick);
+        listen(body, 'click', onPlaceClick);
         listen(place, 'click', enablePlaceClick);
-        listen(place, 'touchstart', enablePlaceClick);
-        listen(place, 'touchmove', disablePlaceClick);
-        listen(place, 'touchend', onPlaceClick);
+        listen(body, 'touchstart', enablePlaceClick);
+        listen(body, 'touchmove', disablePlaceClick);
+        listen(body, 'touchend', onPlaceClick);
 
         listen(byId('DisplayedCard'), 'click', hideDisplayedCard);
     }, false);
