@@ -254,7 +254,7 @@
             }
 
             return arr;
-        });
+        }, ['?', 0.5]);
     }
 
     function getStandardCards() {
