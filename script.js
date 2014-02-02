@@ -11,6 +11,7 @@
         CARD_SIDE_CLASS_NAME = 'card-side',
         showing = false,
         placeClickEnabled = true,
+        body,
         place;
 
     function byId(id) {
@@ -53,7 +54,7 @@
     /*jslint eqeq: false*/
 
     function hideDisplayedCard() {
-        place.classList.remove(SHOW_CARD_IN_BIG_CLASS_NAME);
+        body.classList.remove(SHOW_CARD_IN_BIG_CLASS_NAME);
     }
 
     function setData(element) {
@@ -156,7 +157,7 @@
         hideDisplayedCard();
 
         setTimeout(function () {
-            place.classList.add(SHOW_CARD_IN_BIG_CLASS_NAME);
+            body.classList.add(SHOW_CARD_IN_BIG_CLASS_NAME);
             card.querySelector('.' + FRONT_CARD_CLASS_NAME).innerHTML = processDisplayedValue(value);
         }, 200);
     }
@@ -199,11 +200,11 @@
     }
 
     function isBigCardVisible() {
-        return place.classList.contains(SHOW_CARD_IN_BIG_CLASS_NAME);
+        return body.classList.contains(SHOW_CARD_IN_BIG_CLASS_NAME);
     }
 
     function hideBigCard() {
-        place.classList.remove(SHOW_CARD_IN_BIG_CLASS_NAME);
+        body.classList.remove(SHOW_CARD_IN_BIG_CLASS_NAME);
     }
 
     function onPlaceClick(event) {
@@ -256,22 +257,80 @@
         });
     }
 
-    function getCommercialCards() {
+    function getStandardCards() {
         return ['coffe', '?', 0, 0.5, 1, 2, 3, 5, 8, 13, 20, 40, 100, Infinity];
+    }
+
+    function getTshirtCards() {
+        return ['XS', 'S', 'M', 'L', 'XL', 'XL', '?'];
+    }
+
+    function setActiveCardTypeButton(type) {
+        var toolbar = byId('Toolbar');
+        if (type === 'standard') {
+            toolbar.classList.add('active-standard');
+        } else {
+            toolbar.classList.remove('active-standard');
+        }
+
+        if (type === 'tshirt') {
+            toolbar.classList.add('active-tshirt');
+        } else {
+            toolbar.classList.remove('active-tshirt');
+        }
+
+        if (type === 'fibonacci') {
+            toolbar.classList.add('active-fibonacci');
+        } else {
+            toolbar.classList.remove('active-fibonacci');
+        }
+    }
+
+    function getCards(type) {
+        var cards;
+
+        if (type === 'fibonacci') {
+            cards = getFibonacciCards();
+        } else if (type === 'tshirt') {
+            cards = getTshirtCards();
+        } else {
+            cards = getStandardCards();
+        }
+
+        return cards;
+    }
+
+    function getSelectCardCb(type) {
+        return function () {
+            if (cardChangeDisabled()) {
+                return;
+            }
+            removeCards();
+            addCards(getCards(type));
+            setActiveCardTypeButton(type);
+        };
     }
 
     listen(window, 'load', function () {
         place = byId('PokerPlace');
-        var body = document.getElementsByTagName('body')[0];
+        body = document.getElementsByTagName('body')[0];
 
         removeCards();
-        addCards(getCommercialCards());
+        addCards(getStandardCards());
 
         listen(body, 'click', onPlaceClick);
         listen(place, 'click', enablePlaceClick);
         listen(body, 'touchstart', enablePlaceClick);
         listen(body, 'touchmove', disablePlaceClick);
         listen(body, 'touchend', onPlaceClick);
+
+
+        listen(byId('CardTypeSelectStandard'), 'click', getSelectCardCb('standard'));
+        listen(byId('CardTypeSelectTshirt'), 'click', getSelectCardCb('tshirt'));
+        listen(byId('CardTypeSelectFibonacci'), 'click', getSelectCardCb('fibonacci'));
+        listen(byId('CardTypeSelectStandard'), 'touchend', getSelectCardCb('standard'));
+        listen(byId('CardTypeSelectTshirt'), 'touchend', getSelectCardCb('tshirt'));
+        listen(byId('CardTypeSelectFibonacci'), 'touchend', getSelectCardCb('fibonacci'));
 
         listen(byId('DisplayedCard'), 'click', hideDisplayedCard);
     }, false);

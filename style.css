@@ -6,16 +6,19 @@
 }
 
 html {
-    background-color: #333;
+    background-color: #222b2d;
     margin: 0;
     padding: 0;
+    width: 100%;
+    position: relative;
 }
 body {
+    height: 100%;
     margin: 0;
     padding: 0;
 }
 #PokerPlace {
-    margin: auto;
+    margin: 1rem auto 5rem;
 }
 #PokerPlace:after {
     content: '.';
@@ -54,7 +57,7 @@ body {
     position: fixed;
     top: -110%;
     left: 50%;
-    z-index: 1;
+    z-index: 3;
     margin-right: 0;
     opacity: 0;
 
@@ -79,16 +82,42 @@ body {
 }
 .show-in-big .big-card {
     opacity: 1;
-    z-index: 3;
 }
 .small-card {
     margin: 10px;
     opacity: 1;
     transition: opacity 1s 0.4s;
 }
+#CoverLayer {
+    background-color: #000;
+    display: block;
+    position: absolute;
+    opacity: 0;
+    left: -9999px;
+    top: -9999px;
+   -webkit-transition: opacity 1s 0.5s, top 0.2s;
+       -moz-transition: opacity 1s 0.5s, top 0.2s;
+        -ms-transition: opacity 1s 0.5s, top 0.2s;
+            transition: opacity 1s 0.5s, top 0.2s;
+}
+.show-in-big #CoverLayer {
+    background-color: #000;
+    display: block;
+    opacity: 0.5;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+/*
 .show-in-big .small-card {
     opacity: 0.3;
 }
+.show-in-big #Toolbar {
+    opacity: 0.3;
+}
+*/
 .card-side {
     box-shadow: 0 0 3px #000 inset;
     background: #4dc0f0; /* Old browsers */
@@ -127,6 +156,71 @@ body {
     margin-top: -15%;
 }
 
+#Toolbar {
+    background: #000;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+    opacity: 0.9;
+
+    transition: opacity 1s 0.4s;
+
+    /*
+    display: -moz-flex;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    */
+}
+.toolbar-button-wrapper {
+    margin: 0.5rem;
+}
+.toolbar-button-wrapper:after {
+    content: '.';
+    clear: both;
+    display: block;
+    height: 0;
+}
+.toolbar-button {
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 1px solid #2c393b;
+    background-image: none;
+    border-radius: 0;
+    font-size: 1.1rem;
+    cursor: pointer;
+    height: 3rem;
+    line-height: 3rem;
+    margin: 0;
+    white-space: nowrap;
+    width: 33.33333%;
+    float: left;
+    /*
+    -moz-box-flex: 1 100%;
+    flex: 1 100%;
+    */
+}
+.toolbar-button:first-child {
+}
+.toolbar-button:last-child {
+    border-right: 0;
+}
+.toolbar-button {
+    background-color: #000;
+    color: #fefefe;
+}
+.toolbar-button:active {
+    color: #000;
+    background-color: #008CAA;
+}
+.active-standard #CardTypeSelectStandard,
+.active-tshirt #CardTypeSelectTshirt,
+.active-fibonacci #CardTypeSelectFibonacci {
+    color: #008CAA;
+    background-color: #000;
+}
 
 @media (max-height: 359px) {
     .card {

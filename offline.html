@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no">
 
-    <title>Scrum Poker</title>
+    <title>Scrum Poker Webapp</title>
+    <meta name="description" content="Web application to agile development, like scrum or kanban. Planning poker will help you to estimate story complexity.">
     <style type="text/css">
         @import url(style.css);
     </style>
@@ -18,5 +19,13 @@
             <div class="card-side back"></div>
         </div>
     </div>
+    <div id="Toolbar" class="active-standard">
+        <div class="toolbar-button-wrapper">
+        <button type="button" class="toolbar-button" data-cardtype="standard" id="CardTypeSelectStandard">Standard</button>
+        <button type="button" class="toolbar-button" data-cardtype="tshirt" id="CardTypeSelectTshirt">T-Shirt</button>
+        <button type="button" class="toolbar-button" data-cardtype="fibonacci" id="CardTypeSelectFibonacci">Fibonacci</button>
+        </div>
+    </div>
+    <div id="CoverLayer"></div>
 </body>
 </html>
