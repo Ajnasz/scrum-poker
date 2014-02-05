@@ -1,6 +1,6 @@
 EPIC
 
-It want to be able to create a spcac where invited friends can join and can view the state of a planning.
+It want to be able to create a room where invited friends can join and can view the state of a planning.
 
 Screens:
     *create screen*: Where the user can create a room
