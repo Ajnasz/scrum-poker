@@ -1,0 +1,67 @@
+EPIC
+
+It want to be able to create a spcac where invited friends can join and can view the state of a planning.
+
+Screens:
+    *create screen*: Where the user can create a room
+    *create confirm screen*: Where the user sees the room's url and can join or go to *room's screen*
+    *join room screen*: Where the user join to a room
+    *planning screen*: only planning poker cards visible
+    *room's screen*: Where the a summary is visible about the planning's state
+
+Menu to create or join to a room:
+    If choose create:
+        Go to *create screen*
+
+    If choose join:
+        Go to *join room screen*
+
+
+*create screen*
+    An input field, where the user should enter the room's name
+    A button next to the field, to create the room
+    Another button blow the input to create a random name
+
+    It should be possible set a custom room name
+        If room name already taken, it shouldn't be allowed to create again
+
+    It should be possible to generate a room name with an easy to remember room name (real words)
+
+    After create, the user should see the *create confirm screen*
+
+
+*create confirm screen*
+    The room url should be displayed
+    Show a button with join to room text which joins the user to room and leads him to the *planning screen*
+    Show a button with show results text which leads the user to the *room's screen*
+
+
+*join room screen*
+    Input field for the room name
+    Join to room button
+        Clicking on the button, tries to join the user to the room
+
+    If room does not exists:
+        Show a create room button:
+            Leads to the *create screen*
+        The input field should be still visible, so the user can change the name
+
+    If room exists:
+        Leads the user to the *planning screen*
+
+
+*planning screen*
+    Cards are visible
+    Room name visible
+    Any status should be visible?
+
+
+*room's screen*
+    A summary is visible about the current planning:
+        Would be nice to know how many user joined to the room
+        If we can do that, show a card for each user
+            When a user voted, a card should show up with the side where the number is visible
+
+    Close room button
+        Deletes the room
+        The joined users should be notifed that the room has been closed
