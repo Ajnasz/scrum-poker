@@ -86,7 +86,10 @@ body {
 .small-card {
     margin: 10px;
     opacity: 1;
-    transition: opacity 1s 0.4s;
+    -webkit-transition: opacity 1s 0.4s;
+       -moz-transition: opacity 1s 0.4s;
+        -ms-transition: opacity 1s 0.4s;
+            transition: opacity 1s 0.4s;
 }
 #CoverLayer {
     background-color: #000;
@@ -96,9 +99,9 @@ body {
     left: -9999px;
     top: -9999px;
    -webkit-transition: opacity 1s 0.5s, top 0.2s;
-       -moz-transition: opacity 1s 0.5s, top 0.2s;
-        -ms-transition: opacity 1s 0.5s, top 0.2s;
-            transition: opacity 1s 0.5s, top 0.2s;
+      -moz-transition: opacity 1s 0.5s, top 0.2s;
+       -ms-transition: opacity 1s 0.5s, top 0.2s;
+           transition: opacity 1s 0.5s, top 0.2s;
 }
 .show-in-big #CoverLayer {
     background-color: #000;
@@ -164,7 +167,14 @@ body {
     z-index: 2;
     opacity: 0.85;
 
-    transition: opacity 1s 0.4s;
+    -webkit-transition: opacity 1s 0.4s, -webkit-transform 0.5s;
+       -moz-transition: opacity 1s 0.4s, -moz-transform 0.5s;
+        -ms-transition: opacity 1s 0.4s, -ms-transform 0.5s;
+            transition: opacity 1s 0.4s, transform 0.5s;
+    -webkit-transform: translateY(0);
+       -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+            transform: translateY(0);
 
     /*
     display: -moz-flex;
@@ -172,6 +182,12 @@ body {
     align-content: center;
     justify-content: space-around;
     */
+}
+.show-in-big #Toolbar {
+    -webkit-transform: translateY(3.5rem);
+       -moz-transform: translateY(3.5rem);
+        -ms-transform: translateY(3.5rem);
+            transform: translateY(3.5rem);
 }
 .toolbar-button-wrapper {
     margin: 0.5rem;
