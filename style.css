@@ -205,6 +205,7 @@ body {
     border-right: 1px solid #2c393b;
     background-image: none;
     border-radius: 0;
+    font-family: 'FireSans';
     font-size: 1.1rem;
     cursor: pointer;
     height: 3rem;
