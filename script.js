@@ -1,6 +1,6 @@
 /*jslint browser: true*/
 (function () {
-    "use strict";
+    'use strict';
 
     var SHOW_CARD_IN_BIG_CLASS_NAME = 'show-in-big',
         CARD_CLASS_NAME = 'card',
@@ -9,6 +9,12 @@
         FRONT_CARD_CLASS_NAME = 'front',
         BACK_CARD_CLASS_NAME = 'back',
         CARD_SIDE_CLASS_NAME = 'card-side',
+        DOM_EVENTS = {
+            CLICK: 'click',
+            TOUCHEND: 'touchend',
+            TOUCHMOVE: 'touchmove',
+            TOUCHSTART: 'touchstart'
+        },
         showing = false,
         placeClickEnabled = true,
         body,
@@ -23,7 +29,10 @@
     }
 
     function onClick(elem, cb) {
-        listen(byId(elem), 'click', cb);
+        if (typeof elem === 'string') {
+            elem = byId(elem);
+        }
+        listen(elem, DOM_EVENTS.CLICK, cb);
     }
 
     function isSmallCardElem(elem) {
@@ -318,20 +327,20 @@
         removeCards();
         addCards(getStandardCards());
 
-        listen(body, 'click', onPlaceClick);
-        listen(place, 'click', enablePlaceClick);
+        onClick(body, onPlaceClick);
+        listen(place, enablePlaceClick);
         listen(body, 'touchstart', enablePlaceClick);
         listen(body, 'touchmove', disablePlaceClick);
-        listen(body, 'touchend', onPlaceClick);
+        listen(body, DOM_EVENTS.TOUCHEND, onPlaceClick);
 
 
-        listen(byId('CardTypeSelectStandard'), 'click', getSelectCardCb('standard'));
-        listen(byId('CardTypeSelectTshirt'), 'click', getSelectCardCb('tshirt'));
-        listen(byId('CardTypeSelectFibonacci'), 'click', getSelectCardCb('fibonacci'));
-        listen(byId('CardTypeSelectStandard'), 'touchend', getSelectCardCb('standard'));
-        listen(byId('CardTypeSelectTshirt'), 'touchend', getSelectCardCb('tshirt'));
-        listen(byId('CardTypeSelectFibonacci'), 'touchend', getSelectCardCb('fibonacci'));
+        onClick('CardTypeSelectStandard', getSelectCardCb('standard'));
+        onClick('CardTypeSelectTshirt', getSelectCardCb('tshirt'));
+        onClick('CardTypeSelectFibonacci', getSelectCardCb('fibonacci'));
+        listen(byId('CardTypeSelectStandard'), DOM_EVENTS.TOUCHEND, getSelectCardCb('standard'));
+        listen(byId('CardTypeSelectTshirt'), DOM_EVENTS.TOUCHEND, getSelectCardCb('tshirt'));
+        listen(byId('CardTypeSelectFibonacci'), DOM_EVENTS.TOUCHEND, getSelectCardCb('fibonacci'));
 
-        listen(byId('DisplayedCard'), 'click', hideDisplayedCard);
+        onClick('DisplayedCard', hideDisplayedCard);
     }, false);
 }());
