@@ -11,7 +11,8 @@
     "120": "/images/icon-120.png",
     "90": "/images/icon-90.png",
     "60": "/images/icon-60.png",
-    "32": "/images/icon-32.png"
+    "32": "/images/icon-32.png",
+    "16": "/images/icon-16.png"
   },
   "developer": {
     "name": "Lajos Koszti",
