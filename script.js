@@ -15,6 +15,11 @@
             TOUCHMOVE: 'touchmove',
             TOUCHSTART: 'touchstart'
         },
+        CARD_TYPES = {
+            FIBONACI:'fibonacci',
+            STANDARD: 'standard',
+            TSHIRT: 'tshirt'
+        },
         showing = false,
         placeClickEnabled = true,
         body,
@@ -34,6 +39,15 @@
         }
         listen(elem, DOM_EVENTS.CLICK, cb);
     }
+
+    /*
+    function onTouchEnd(elem, cb) {
+        if (typeof elem === 'string') {
+            elem = byId(elem);
+        }
+        listen(elem, DOM_EVENTS.TOUCHEND, cb);
+    }
+    */
 
     function isSmallCardElem(elem) {
         var classList = elem.classList;
@@ -276,19 +290,19 @@
 
     function setActiveCardTypeButton(type) {
         var toolbar = byId('Toolbar');
-        if (type === 'standard') {
+        if (type === CARD_TYPES.STANDARD) {
             toolbar.classList.add('active-standard');
         } else {
             toolbar.classList.remove('active-standard');
         }
 
-        if (type === 'tshirt') {
+        if (type === CARD_TYPES.TSHIRT) {
             toolbar.classList.add('active-tshirt');
         } else {
             toolbar.classList.remove('active-tshirt');
         }
 
-        if (type === 'fibonacci') {
+        if (type === CARD_TYPES.FIBONACI) {
             toolbar.classList.add('active-fibonacci');
         } else {
             toolbar.classList.remove('active-fibonacci');
@@ -298,9 +312,9 @@
     function getCards(type) {
         var cards;
 
-        if (type === 'fibonacci') {
+        if (type === CARD_TYPES.FIBONACI) {
             cards = getFibonacciCards();
-        } else if (type === 'tshirt') {
+        } else if (type === CARD_TYPES.TSHIRT) {
             cards = getTshirtCards();
         } else {
             cards = getStandardCards();
@@ -320,7 +334,38 @@
         };
     }
 
+    window.spoker.Page = window.spoker.View.enclose(function () {
+        this.setupCardTypeSelector = function () {
+            var // standardCb = getSelectCardCb(CARD_TYPES.STANDARD),
+                // tshirtCb = getSelectCardCb(CARD_TYPES.TSHIRT),
+                // fibonacciCb = getSelectCardCb(CARD_TYPES.FIBONACI),
+                standardCardTypeSelector = this.byId('CardTypeSelectStandard'),
+                tshirtCardTypeSelector = this.byId('CardTypeSelectTshirt'),
+                fibonacciCardTypeSelector = this.byId('CardTypeSelectFibonacci');
+
+            this.onClick(tshirtCardTypeSelector, function () {
+                this.emit('tshirtSelected');
+            }.bind(this));
+            this.onClick(fibonacciCardTypeSelector, function () {
+                this.emit('fibonacciSelected');
+            }.bind(this));
+            this.onTouchEnd(tshirtCardTypeSelector, function () {
+                this.emit('tshirtSelected');
+            }.bind(this));
+            this.onTouchEnd(fibonacciCardTypeSelector, function () {
+                this.emit('fibonacciSelected');
+            }.bind(this));
+            this.onClick(standardCardTypeSelector, function () {
+                this.emit('standardSelected');
+            }.bind(this));
+            this.onTouchEnd(standardCardTypeSelector, function () {
+                this.emit('standardSelected');
+            }.bind(this));
+        };
+    });
+
     listen(window, 'load', function () {
+        var page, controller;
         place = byId('PokerPlace');
         body = document.getElementsByTagName('body')[0];
 
@@ -328,18 +373,22 @@
         addCards(getStandardCards());
 
         onClick(body, onPlaceClick);
+
+        page = window.spoker.Page();
+
+        controller = window.spoker.Controller();
+        
+        controller.listenViewEvents(page, {
+            'standardSelected': getSelectCardCb(CARD_TYPES.STANDARD),
+            'fibonacciSelected': getSelectCardCb(CARD_TYPES.FIBONACI),
+            'tshirtSelected': getSelectCardCb(CARD_TYPES.TSHIRT)
+        });
+
+        page.setupCardTypeSelector();
         listen(place, enablePlaceClick);
-        listen(body, 'touchstart', enablePlaceClick);
-        listen(body, 'touchmove', disablePlaceClick);
+        listen(body, DOM_EVENTS.TOUCHSTART, enablePlaceClick);
+        listen(body, DOM_EVENTS.TOUCHMOVE, disablePlaceClick);
         listen(body, DOM_EVENTS.TOUCHEND, onPlaceClick);
-
-
-        onClick('CardTypeSelectStandard', getSelectCardCb('standard'));
-        onClick('CardTypeSelectTshirt', getSelectCardCb('tshirt'));
-        onClick('CardTypeSelectFibonacci', getSelectCardCb('fibonacci'));
-        listen(byId('CardTypeSelectStandard'), DOM_EVENTS.TOUCHEND, getSelectCardCb('standard'));
-        listen(byId('CardTypeSelectTshirt'), DOM_EVENTS.TOUCHEND, getSelectCardCb('tshirt'));
-        listen(byId('CardTypeSelectFibonacci'), DOM_EVENTS.TOUCHEND, getSelectCardCb('fibonacci'));
 
         onClick('DisplayedCard', hideDisplayedCard);
     }, false);
