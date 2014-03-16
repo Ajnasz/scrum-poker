@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-(function () {
+(function (spoker) {
     'use strict';
 
     var SHOW_CARD_IN_BIG_CLASS_NAME = 'show-in-big',
@@ -246,17 +246,17 @@
         removeCards();
         addCards(getStandardCards());
 
-        cardsPlace = window.spoker.CardsPlace();
+        cardsPlace = spoker.CardsPlace();
         cardsPlace.setupPlaceClickEnabler();
 
-        window.spoker.PlaceController({
+        spoker.PlaceController({
             view: cardsPlace
         }).listenViewEvents();
 
-        cardTypeSelector = window.spoker.CardTypeSelectorView();
+        cardTypeSelector = spoker.CardTypeSelectorView();
         cardTypeSelector.setupCardTypeSelector();
 
-        cardTypeController = window.spoker.Controller({
+        cardTypeController = spoker.Controller({
             view: cardTypeSelector,
             viewEvents: {
                 'standardSelected': getSelectCardCb(CARD_TYPES.STANDARD),
@@ -269,4 +269,4 @@
 
         onClick('DisplayedCard', hideDisplayedCard);
     }, false);
-}());
+}(window.spoker = window.spoker || {}));
