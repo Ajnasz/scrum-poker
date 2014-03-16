@@ -49,27 +49,6 @@
     }
     */
 
-    function isSmallCardElem(elem) {
-        var classList = elem.classList;
-        return classList &&
-                classList.contains(CARD_CLASS_NAME) &&
-                !classList.contains(BIG_CARD_CLASS_NAME);
-    }
-
-    function getCardElem(elem) {
-        var output;
-
-        if (isSmallCardElem(elem)) {
-            output = elem;
-        } else if (elem.parentNode) {
-            output = getCardElem(elem.parentNode);
-        } else {
-            output = null;
-        }
-
-        return output;
-    }
-
     /*jslint eqeq: true*/
     function truthy(elem) {
         return elem != null;
@@ -92,17 +71,6 @@
         return function (data) {
             setElementData.apply(element, data);
         };
-    }
-
-    function getData(element, name) {
-        var output;
-        if (element.dataset) {
-            output = element.dataset[name];
-        } else {
-            output = element.getAttribute('data-' + name);
-        }
-
-        return output;
     }
 
     function setAttributes(element) {
@@ -174,17 +142,6 @@
         return card;
     }
 
-    function showDisplayedCard(value) {
-        var card = byId('DisplayedCard');
-
-        hideDisplayedCard();
-
-        setTimeout(function () {
-            body.classList.add(SHOW_CARD_IN_BIG_CLASS_NAME);
-            card.querySelector('.' + FRONT_CARD_CLASS_NAME).innerHTML = processDisplayedValue(value);
-        }, 200);
-    }
-
     function toArray(args) {
         return Array.prototype.slice.call(args);
     }
@@ -209,61 +166,8 @@
         place.appendChild(fragment);
     }
 
-    function showClickedCard(cardElem) {
-        var value;
-
-        if (cardElem) {
-            value = getData(cardElem, 'value');
-            showDisplayedCard(value);
-        }
-    }
-
     function cardChangeDisabled() {
         return showing || !placeClickEnabled;
-    }
-
-    function isBigCardVisible() {
-        return body.classList.contains(SHOW_CARD_IN_BIG_CLASS_NAME);
-    }
-
-    function hideBigCard() {
-        body.classList.remove(SHOW_CARD_IN_BIG_CLASS_NAME);
-    }
-
-    function onPlaceClick(event) {
-        var cardElem;
-
-        event.preventDefault();
-        event.stopPropagation();
-
-        if (cardChangeDisabled()) {
-            return;
-        }
-
-        if (isBigCardVisible()) {
-            hideBigCard();
-        } else {
-            cardElem = getCardElem(event.target);
-
-            if (cardElem) {
-                showClickedCard(cardElem);
-            }
-        }
-
-        showing = true;
-
-        setTimeout(function () {
-            showing = false;
-        }, 200);
-    }
-
-
-    function disablePlaceClick() {
-        placeClickEnabled = false;
-    }
-
-    function enablePlaceClick() {
-        placeClickEnabled = true;
     }
 
     function getFibonacciCards() {
@@ -334,61 +238,34 @@
         };
     }
 
-    window.spoker.Page = window.spoker.View.enclose(function () {
-        this.setupCardTypeSelector = function () {
-            var // standardCb = getSelectCardCb(CARD_TYPES.STANDARD),
-                // tshirtCb = getSelectCardCb(CARD_TYPES.TSHIRT),
-                // fibonacciCb = getSelectCardCb(CARD_TYPES.FIBONACI),
-                standardCardTypeSelector = this.byId('CardTypeSelectStandard'),
-                tshirtCardTypeSelector = this.byId('CardTypeSelectTshirt'),
-                fibonacciCardTypeSelector = this.byId('CardTypeSelectFibonacci');
-
-            this.onClick(tshirtCardTypeSelector, function () {
-                this.emit('tshirtSelected');
-            }.bind(this));
-            this.onClick(fibonacciCardTypeSelector, function () {
-                this.emit('fibonacciSelected');
-            }.bind(this));
-            this.onTouchEnd(tshirtCardTypeSelector, function () {
-                this.emit('tshirtSelected');
-            }.bind(this));
-            this.onTouchEnd(fibonacciCardTypeSelector, function () {
-                this.emit('fibonacciSelected');
-            }.bind(this));
-            this.onClick(standardCardTypeSelector, function () {
-                this.emit('standardSelected');
-            }.bind(this));
-            this.onTouchEnd(standardCardTypeSelector, function () {
-                this.emit('standardSelected');
-            }.bind(this));
-        };
-    });
-
     listen(window, 'load', function () {
-        var page, controller;
+        var cardTypeSelector, cardsPlace, cardTypeController;
         place = byId('PokerPlace');
         body = document.getElementsByTagName('body')[0];
 
         removeCards();
         addCards(getStandardCards());
 
-        onClick(body, onPlaceClick);
+        cardsPlace = window.spoker.CardsPlace();
+        cardsPlace.setupPlaceClickEnabler();
 
-        page = window.spoker.Page();
+        window.spoker.PlaceController({
+            view: cardsPlace
+        }).listenViewEvents();
 
-        controller = window.spoker.Controller();
-        
-        controller.listenViewEvents(page, {
-            'standardSelected': getSelectCardCb(CARD_TYPES.STANDARD),
-            'fibonacciSelected': getSelectCardCb(CARD_TYPES.FIBONACI),
-            'tshirtSelected': getSelectCardCb(CARD_TYPES.TSHIRT)
+        cardTypeSelector = window.spoker.CardTypeSelectorView();
+        cardTypeSelector.setupCardTypeSelector();
+
+        cardTypeController = window.spoker.Controller({
+            view: cardTypeSelector,
+            viewEvents: {
+                'standardSelected': getSelectCardCb(CARD_TYPES.STANDARD),
+                'fibonacciSelected': getSelectCardCb(CARD_TYPES.FIBONACI),
+                'tshirtSelected': getSelectCardCb(CARD_TYPES.TSHIRT)
+            }
         });
 
-        page.setupCardTypeSelector();
-        listen(place, enablePlaceClick);
-        listen(body, DOM_EVENTS.TOUCHSTART, enablePlaceClick);
-        listen(body, DOM_EVENTS.TOUCHMOVE, disablePlaceClick);
-        listen(body, DOM_EVENTS.TOUCHEND, onPlaceClick);
+        cardTypeController.listenViewEvents();
 
         onClick('DisplayedCard', hideDisplayedCard);
     }, false);

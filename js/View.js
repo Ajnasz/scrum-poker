@@ -23,6 +23,7 @@
         this.emit = function (event) {
             var args;
 
+
             if (this.events && this.events[event]) {
                 args = this.toArray(arguments);
                 args.shift();
