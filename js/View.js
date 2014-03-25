@@ -1,5 +1,5 @@
 (function (stampit, spoker) {
-    spoker.View = spoker.Util.enclose(function () {
+    spoker.View = spoker.Events.enclose(function () {
         var DOM_EVENTS = {
             CLICK: 'click',
             TOUCHEND: 'touchend',
@@ -7,31 +7,6 @@
             TOUCHSTART: 'touchstart'
         };
         this.DOM_EVENTS = DOM_EVENTS;
-
-        this.on = function (event, callback) {
-            if (!this.events) {
-                this.events = {};
-            }
-
-            if (!this.events[event]) {
-                this.events[event] = [];
-            }
-
-            this.events[event].push(callback);
-        };
-
-        this.emit = function (event) {
-            var args;
-
-
-            if (this.events && this.events[event]) {
-                args = this.toArray(arguments);
-                args.shift();
-                this.events[event].forEach(function (callback) {
-                    callback.apply(this, args);
-                }.bind(this));
-            }
-        };
 
         this.listen = function (elem, event, cb) {
             elem.addEventListener(event, cb, false);
