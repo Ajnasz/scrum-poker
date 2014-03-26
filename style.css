@@ -9,6 +9,7 @@ html {
     background-color: #222b2d;
     margin: 0;
     padding: 0;
+    height: 100%;
     width: 100%;
     position: relative;
 }
@@ -18,7 +19,8 @@ body {
     padding: 0;
 }
 #PokerPlace {
-    margin: 1rem auto 5rem;
+    padding: 1rem 0 5rem;
+    margin: auto;
 }
 #PokerPlace:after {
     content: '.';
