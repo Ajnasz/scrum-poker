@@ -1,5 +1,5 @@
 (function (stampit, spoker) {
-    spoker.View = spoker.Events.enclose(function () {
+    spoker.View = stampit.compose(spoker.Events, stampit().enclose(function () {
         var DOM_EVENTS = {
             CLICK: 'click',
             TOUCHEND: 'touchend',
@@ -31,5 +31,5 @@
             }
             this.listen(elem, DOM_EVENTS.TOUCHEND, cb);
         };
-    });
+    }));
 }(window.stampit, window.spoker = window.spoker || {}));

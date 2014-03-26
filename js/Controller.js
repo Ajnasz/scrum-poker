@@ -1,5 +1,5 @@
 (function (stampit, spoker) {
-    spoker.Controller = spoker.Util.enclose(function () {
+    spoker.Controller = stampit.compose(spoker.Util, stampit().enclose(function () {
         this.listenViewEvents = function () {
             var view = this.view,
                 viewEvents = this.viewEvents;
@@ -12,6 +12,5 @@
 
             return this;
         };
-
-    });
+    }));
 }(window.stampit, window.spoker = window.spoker || {}));
