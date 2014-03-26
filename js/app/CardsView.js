@@ -79,12 +79,54 @@
             return card;
         }
 
-        function removeCards() {
-            var place = this.byId(this.place);
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
 
+        function getTranslateVal(value) {
+            return (Math.floor(Math.random() * 10) % 2 ? '-' : '') + getRandomInt(value, value);
+        }
+
+        function removeCards(callback) {
+            var place = this.byId(this.place),
+                children = this.toArray(place.childNodes),
+                width = window.innerWidth,
+                height = window.innerHeight;
+
+            if (children.length) {
+                children.forEach(function (card) {
+                    card.addEventListener('transitionend', function () {
+                        if (card.classList.contains('remove')) {
+                            place.removeChild(card);
+
+                            if (!place.firstChild) {
+                                callback();
+                            }
+                        }
+                    }, false);
+                    if (card.nodeType === 1) {
+                        card.classList.add('remove');
+                        var transform = 'translate(' + getTranslateVal(width) + 'px,' + getTranslateVal(height) + 'px)';
+                        card.style.WebkitTransform = transform;
+                        card.style.MozTransform = transform;
+                        card.style.MsTransform = transform;
+                        card.style.transform = transform;
+                    } else {
+                        place.removeChild(card);
+                        if (!place.firstChild) {
+                            callback();
+                        }
+                    }
+                }.bind(this));
+            } else {
+                callback();
+            }
+
+            /*
             while (place.firstChild) {
                 place.removeChild(place.firstChild);
             }
+            */
         }
 
         function disablePlaceClick() {
@@ -115,13 +157,27 @@
         }
 
         this.renderCards = function (cards) {
-            var fragment = document.createDocumentFragment();
-            removeCards.call(this);
-            cards.map(createCard.bind(this)).forEach(function (card) {
-                fragment.appendChild(card);
-            });
+            var width = window.innerWidth,
+                height = window.innerHeight;
+            removeCards.call(this, function () {
+                var fragment = document.createDocumentFragment();
+                cards.map(createCard.bind(this)).forEach(function (card) {
+                    var transform = 'translate(' + getTranslateVal(width) + 'px,' + getTranslateVal(height) + 'px)';
+                    card.style.WebkitTransform = transform;
+                    card.style.MozTransform = transform;
+                    card.style.MsTransform = transform;
+                    card.style.transform = transform;
+                    fragment.appendChild(card);
+                    setTimeout(function () {
+                        card.style.WebkitTransform = '';
+                        card.style.MozTransform = '';
+                        card.style.MsTransform = '';
+                        card.style.transform = '';
+                    }, 10);
+                }.bind(this));
 
-            this.byId(this.place).appendChild(fragment);
+                this.byId(this.place).appendChild(fragment);
+            }.bind(this));
         };
 
         this.getCardValue = function (card) {

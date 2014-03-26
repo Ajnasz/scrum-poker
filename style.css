@@ -17,6 +17,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 #PokerPlace {
     padding: 1rem 0 5rem;
@@ -40,6 +41,7 @@ body {
     font-weight: bold;
     font-size: 30px;
     text-align: center;
+    opacity: 1;
 
     -webkit-transition: width 0.5s, height 0.5s;
        -moz-transition: width 0.5s, height 0.5s;
@@ -55,6 +57,12 @@ body {
     width: 100px;
     z-index: 2;
 }
+.card.remove {
+    -webkit-transform: translateX(-700px);
+       -moz-transform: translateX(-700px);
+        -ms-transform: translateX(-700px);
+            transform: translateX(-700px);
+}
 .big-card {
     position: fixed;
     top: -110%;
@@ -65,7 +73,7 @@ body {
 
     -webkit-transform: translateZ(0);
        -moz-transform: translateZ(0);
-        -ms-transform: -translateZ(0);
+        -ms-transform: translateZ(0);
             transform: translateZ(0);
 
 
@@ -88,10 +96,10 @@ body {
 .small-card {
     margin: 10px;
     opacity: 1;
-    -webkit-transition: opacity 1s 0.4s;
-       -moz-transition: opacity 1s 0.4s;
-        -ms-transition: opacity 1s 0.4s;
-            transition: opacity 1s 0.4s;
+    -webkit-transition: opacity 0.5s 0.4s, -webkit-transform 0.8s;
+       -moz-transition: opacity 0.5s 0.4s,    -moz-transform 0.8s;
+        -ms-transition: opacity 0.5s 0.4s,     -ms-transform 0.8s;
+            transition: opacity 0.5s 0.4s,         transform 0.8s;
 }
 #CoverLayer {
     background-color: #000;
