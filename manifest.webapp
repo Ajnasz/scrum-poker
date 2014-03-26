@@ -1,7 +1,7 @@
 {
   "name": "Scrum poker",
   "description": "App for estimations",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "launch_path": "/index.html",
   "fullscreen": "true",
   "appcache_path": "/scrumpoker.appcache",
