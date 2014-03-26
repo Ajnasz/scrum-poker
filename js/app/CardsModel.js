@@ -33,7 +33,7 @@
         }
 
         function getTshirtCards() {
-            return ['XS', 'S', 'M', 'L', 'XL', 'XL', '?'];
+            return ['XS', 'S', 'M', 'L', 'XL', 'XXL', '?'];
         }
 
         function getStandardCards() {
