@@ -9,6 +9,10 @@
         this.DOM_EVENTS = DOM_EVENTS;
 
         this.listen = function (elem, event, cb) {
+            if (typeof elem === 'string') {
+                elem = this.byId(elem);
+            }
+
             elem.addEventListener(event, cb, false);
         };
         this.byId = function (id) {
