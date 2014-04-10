@@ -47,6 +47,8 @@ body {
        -moz-transition: width 0.5s, height 0.5s;
         -ms-transition: width 0.5s, height 0.5s;
             transition: width 0.5s, height 0.5s;
+
+    transform: translateZ(0);
 }
 .card {
     float: left;
