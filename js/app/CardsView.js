@@ -3,7 +3,7 @@
         var CARD_CLASS_NAME = 'card',
             SMALL_CARD_CLASS_NAME = 'small-card',
             FRONT_CARD_CLASS_NAME = 'front',
-            BACK_CARD_CLASS_NAME = 'back',
+            // BACK_CARD_CLASS_NAME = 'back',
             CARD_SIDE_CLASS_NAME = 'card-side',
             placeClickEnabled = true,
             cardCache;
@@ -81,7 +81,7 @@
                 card = createDiv([CARD_CLASS_NAME, SMALL_CARD_CLASS_NAME], [['value', value]], []);
 
                 createCardSide(card, FRONT_CARD_CLASS_NAME);
-                createCardSide(card, BACK_CARD_CLASS_NAME);
+                // createCardSide(card, BACK_CARD_CLASS_NAME);
 
                 cardCache = card;
             }
@@ -102,7 +102,7 @@
         }
 
         function getTransformCss(width, height) {
-            return 'translate(' + getTranslateVal(getRandomInt(0, width)) + 'px,' + getTranslateVal(height + getRandomInt(100, 300)) + 'px) translateZ(0)';
+            return 'translate(' + getTranslateVal(width + getRandomInt(0, 300)) + 'px,' + getTranslateVal(height + getRandomInt(100, 300)) + 'px) translateZ(0)';
         }
 
         function removeCards(callback) {

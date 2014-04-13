@@ -151,11 +151,14 @@ body {
     vertical-align: middle;
     width: 100%;
 
+    /*
     -webkit-backface-visibility: hidden;
        -moz-backface-visibility: hidden;
         -ms-backface-visibility: hidden;
             backface-visibility: hidden;
+    */
 }
+/*
 .card-side.back {
     background-color: #449AC8;
 
@@ -164,6 +167,7 @@ body {
         -ms-transform: rotateY(180deg);
             transform: rotateY(180deg);
 }
+*/
 
 .card-side img {
     width: 90%;
