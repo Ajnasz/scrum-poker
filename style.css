@@ -9,14 +9,17 @@ html {
     background-color: #222b2d;
     margin: 0;
     padding: 0;
-    height: 100%;
-    width: 100%;
+    /* height: 100%;
+    width: 100%;*/
     position: relative;
 }
 body {
+    /*
     height: 100%;
+    */
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 #PokerPlace {
     padding: 1rem 0 5rem;
@@ -40,11 +43,14 @@ body {
     font-weight: bold;
     font-size: 30px;
     text-align: center;
+    opacity: 1;
 
     -webkit-transition: width 0.5s, height 0.5s;
        -moz-transition: width 0.5s, height 0.5s;
         -ms-transition: width 0.5s, height 0.5s;
             transition: width 0.5s, height 0.5s;
+
+    transform: translateZ(0);
 }
 .card {
     float: left;
@@ -55,43 +61,49 @@ body {
     width: 100px;
     z-index: 2;
 }
+.card.remove {
+    -webkit-transform: translateX(-700px);
+       -moz-transform: translateX(-700px);
+        -ms-transform: translateX(-700px);
+            transform: translateX(-700px);
+}
 .big-card {
     position: fixed;
-    top: -110%;
+    top: 50%;
     left: 50%;
     z-index: 3;
     margin-right: 0;
     opacity: 0;
 
-    -webkit-transform: translateZ(0);
-       -moz-transform: translateZ(0);
-        -ms-transform: -translateZ(0);
-            transform: translateZ(0);
+    -webkit-transform: translateZ(0) translateY(-140%);
+       -moz-transform: translateZ(0) translateY(-140%);
+        -ms-transform: translateZ(0) translateY(-140%);
+            transform: translateZ(0) translateY(-140%);
 
 
     -webkit-transition: opacity 0.5s,
-                        top 0.5s,
-                        margin-top 0.5s;
+                        -webkit-transform 0.5s;
        -moz-transition: opacity 0.5s,
-                        top 0.5s,
-                        margin-top 0.5s;
+                        -moz-transform 0.5s;
         -ms-transition: opacity 0.5s,
-                        top 0.5s,
-                        margin-top 0.5s;
+                        -ms-transform 0.5s;
             transition: opacity 0.5s,
-                        top 0.5s,
-                        margin-top 0.5s;
+                        transform 0.5s;
 }
 .show-in-big .big-card {
     opacity: 1;
+    -webkit-transform: translateZ(0) translateY(0);
+    -moz-transform: translateZ(0) translateY(0);
+    -ms-transform: translateZ(0) translateY(0);
+    transform: translateZ(0) translateY(0);
 }
 .small-card {
     margin: 10px;
     opacity: 1;
-    -webkit-transition: opacity 1s 0.4s;
-       -moz-transition: opacity 1s 0.4s;
-        -ms-transition: opacity 1s 0.4s;
-            transition: opacity 1s 0.4s;
+    -webkit-transition: opacity 0.5s 0.4s, -webkit-transform 0.8s;
+       -moz-transition: opacity 0.5s 0.4s,    -moz-transform 0.8s;
+        -ms-transition: opacity 0.5s 0.4s,     -ms-transform 0.8s;
+            transition: opacity 0.5s 0.4s,         transform 0.8s;
 }
 #CoverLayer {
     background-color: #000;
@@ -141,11 +153,14 @@ body {
     vertical-align: middle;
     width: 100%;
 
+    /*
     -webkit-backface-visibility: hidden;
        -moz-backface-visibility: hidden;
         -ms-backface-visibility: hidden;
             backface-visibility: hidden;
+    */
 }
+/*
 .card-side.back {
     background-color: #449AC8;
 
@@ -154,6 +169,7 @@ body {
         -ms-transform: rotateY(180deg);
             transform: rotateY(180deg);
 }
+*/
 
 .card-side img {
     width: 90%;
@@ -165,18 +181,20 @@ body {
     background: #000;
     position: fixed;
     bottom: 0;
+    opacity: 0;
     width: 100%;
     z-index: 2;
     opacity: 0.85;
+    visibility: hidden;
 
     -webkit-transition: opacity 1s 0.4s, -webkit-transform 0.5s;
        -moz-transition: opacity 1s 0.4s, -moz-transform 0.5s;
         -ms-transition: opacity 1s 0.4s, -ms-transform 0.5s;
             transition: opacity 1s 0.4s, transform 0.5s;
-    -webkit-transform: translateY(0);
-       -moz-transform: translateY(0);
-        -ms-transform: translateY(0);
-            transform: translateY(0);
+    -webkit-transform: translateY(4em);
+       -moz-transform: translateY(4em);
+        -ms-transform: translateY(4em);
+            transform: translateY(4em);
 
     /*
     display: -moz-flex;
@@ -185,11 +203,18 @@ body {
     justify-content: space-around;
     */
 }
-.show-in-big #Toolbar {
-    -webkit-transform: translateY(3.5rem);
-       -moz-transform: translateY(3.5rem);
-        -ms-transform: translateY(3.5rem);
-            transform: translateY(3.5rem);
+#Toolbar.loaded {
+    visibility: visible;
+    -webkit-transform: translateY(0em);
+       -moz-transform: translateY(0em);
+        -ms-transform: translateY(0em);
+            transform: translateY(0em);
+}
+.show-in-big #Toolbar.loaded {
+    -webkit-transform: translateY(3.5em);
+       -moz-transform: translateY(3.5em);
+        -ms-transform: translateY(3.5em);
+            transform: translateY(3.5em);
 }
 .toolbar-button-wrapper {
     margin: 0.5rem;
@@ -254,9 +279,6 @@ body {
         line-height: 275px;
         margin-left: -105px; /* -width/2 - 10px border */
         width: 190px;
-    }
-    .show-in-big .big-card {
-        top: 50%;
         margin-top: -147px;
     }
 }
@@ -273,9 +295,6 @@ body {
         height: 315px;
         width: 230px;
         margin-left: -125px; /* -width/2 - 10px border */
-    }
-    .show-in-big .big-card {
-        top: 50%;
         margin-top: -168px;
     }
 }
@@ -293,10 +312,6 @@ body {
         height: 525px;
         margin-left: -195px; /* -width/2 - 20px border*/
         width: 350px;
-    }
-
-    .show-in-big .big-card {
-        top: 50%;
         margin-top: -283px;
     }
 }

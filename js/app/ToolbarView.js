@@ -61,13 +61,18 @@
         }
 
         function onToolbarUserSelect(event) {
-            this.selectCardSet(getCardSetName(event.target));
-            this.emit('selectCardSet');
+            if (event.target.classList.contains('toolbar-button')) {
+                this.selectCardSet(getCardSetName(event.target));
+                this.emit('selectCardSet');
+            }
         }
 
         this.setup = function () {
             this.listen(this.toolbar, this.DOM_EVENTS.TOUCHSTART, onToolbarUserSelect.bind(this));
             this.listen(this.toolbar, this.DOM_EVENTS.CLICK, onToolbarUserSelect.bind(this));
+            setTimeout(function () {
+                getToolbar.call(this).classList.add('loaded');
+            }.bind(this), 500);
         };
     }));
 

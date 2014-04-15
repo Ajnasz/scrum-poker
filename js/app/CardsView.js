@@ -3,9 +3,10 @@
         var CARD_CLASS_NAME = 'card',
             SMALL_CARD_CLASS_NAME = 'small-card',
             FRONT_CARD_CLASS_NAME = 'front',
-            BACK_CARD_CLASS_NAME = 'back',
+            // BACK_CARD_CLASS_NAME = 'back',
             CARD_SIDE_CLASS_NAME = 'card-side',
-            placeClickEnabled = true;
+            placeClickEnabled = true,
+            cardCache;
 
         /*jslint eqeq: true*/
         function truthy(elem) {
@@ -19,16 +20,17 @@
             };
         }
 
-        function setData(element) {
-            function setElementData(name, value) {
-                if (element.dataset) {
-                    element.dataset[name] = value;
-                } else {
-                    element.setAttribute('data-' + name, value);
-                }
+        function setElementData(element, name, value) {
+            if (element.dataset) {
+                element.dataset[name] = value;
+            } else {
+                element.setAttribute('data-' + name, value);
             }
+        }
 
+        function setData(element) {
             return function (data) {
+                data.unshift(element);
                 setElementData.apply(element, data);
             };
         }
@@ -71,19 +73,77 @@
         }
 
         function createCard(value) {
-            var card = createDiv([CARD_CLASS_NAME, SMALL_CARD_CLASS_NAME], [['value', value]], []);
+            var card, html;
 
-            createCardSide(card, FRONT_CARD_CLASS_NAME, this.cardValueToHTML(value));
-            createCardSide(card, BACK_CARD_CLASS_NAME);
+            html = this.cardValueToHTML(value);
+
+            if (!cardCache) {
+                card = createDiv([CARD_CLASS_NAME, SMALL_CARD_CLASS_NAME], [['value', value]], []);
+
+                createCardSide(card, FRONT_CARD_CLASS_NAME);
+                // createCardSide(card, BACK_CARD_CLASS_NAME);
+
+                cardCache = card;
+            }
+
+            card = cardCache.cloneNode(true);
+            setElementData(card, 'value', value);
+            card.firstChild.innerHTML = html;
 
             return card;
         }
 
-        function removeCards() {
-            var place = this.byId(this.place);
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
 
-            while (place.firstChild) {
-                place.removeChild(place.firstChild);
+        function getTranslateVal(value) {
+            return (Math.floor(Math.random() * 10) % 2 ? '-' : '') + getRandomInt(value, value);
+        }
+
+        function getTransformCss(width, height) {
+            return 'translate(' + getTranslateVal(width + getRandomInt(0, 300)) + 'px,' +
+                getTranslateVal(height + getRandomInt(100, 300)) + 'px) translateZ(0)';
+        }
+
+        function removeCards(callback) {
+            var place = this.byId(this.place),
+                children = this.toArray(place.childNodes),
+                width = place.offsetWidth,
+                height = place.offsetHeight;
+
+            function realCardRemove(card) {
+                place.removeChild(card);
+
+                if (!place.firstChild) {
+                    callback();
+                }
+            }
+
+            function onTransitionEnd() {
+                var card = this;
+                if (card.classList.contains('remove')) {
+                    card.removeEventListener('transitionend', onTransitionEnd, false);
+                    realCardRemove(card);
+                }
+            }
+
+            function markCardForRemove(card) {
+                card.addEventListener('transitionend', onTransitionEnd, false);
+                card.classList.add('remove');
+                transformCard(card, getTransformCss(width, height));
+            }
+
+            if (children.length) {
+                children.forEach(function (card) {
+                    if (card.nodeType === 1) {
+                        markCardForRemove(card);
+                    } else {
+                        realCardRemove(card);
+                    }
+                }.bind(this));
+            } else {
+                callback();
             }
         }
 
@@ -114,14 +174,33 @@
             return output;
         }
 
-        this.renderCards = function (cards) {
-            var fragment = document.createDocumentFragment();
-            removeCards.call(this);
-            cards.map(createCard.bind(this)).forEach(function (card) {
-                fragment.appendChild(card);
-            });
+        function transformCard(card, transform) {
+            card.style.WebkitTransform = transform;
+            card.style.MozTransform = transform;
+            card.style.MsTransform = transform;
+            card.style.transform = transform;
+        }
 
-            this.byId(this.place).appendChild(fragment);
+        this.renderCards = function (cards) {
+            var place = this.byId(this.place),
+                width = place.offsetWidth,
+                height = place.offsetHeight;
+
+            removeCards.call(this, function () {
+                var fragment = document.createDocumentFragment();
+                cards.map(createCard.bind(this)).forEach(function (card) {
+                    var transform = getTransformCss(width, height);
+
+                    transformCard(card, transform);
+                    fragment.appendChild(card);
+
+                    setTimeout(function () {
+                        transformCard(card, '');
+                    }, 0);
+                }.bind(this));
+
+                this.byId(this.place).appendChild(fragment);
+            }.bind(this));
         };
 
         this.getCardValue = function (card) {
@@ -143,7 +222,6 @@
             });
             this.listen(this.place, this.DOM_EVENTS.TOUCHEND, function (event) {
                 if (placeClickEnabled) {
-                    
                     disablePlaceClick();
                     this.emit('placeClick', event.target);
                     setTimeout(enablePlaceClick, 300);
