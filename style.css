@@ -288,8 +288,6 @@ body {
         margin-left: -125px; /* -width/2 - 10px border */
         margin-top: -168px;
     }
-    .show-in-big .big-card {
-    }
 }
 @media (min-height: 760px) {
     .card {
@@ -306,9 +304,6 @@ body {
         margin-left: -195px; /* -width/2 - 20px border*/
         width: 350px;
         margin-top: -283px;
-    }
-
-    .show-in-big .big-card {
     }
 }
 @media (max-width: 329px) and (max-height: 359px){
