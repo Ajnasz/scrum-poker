@@ -69,33 +69,33 @@ body {
 }
 .big-card {
     position: fixed;
-    top: -110%;
+    top: 50%;
     left: 50%;
     z-index: 3;
     margin-right: 0;
     opacity: 0;
 
-    -webkit-transform: translateZ(0);
-       -moz-transform: translateZ(0);
-        -ms-transform: translateZ(0);
-            transform: translateZ(0);
+    -webkit-transform: translateZ(0) translateY(-140%);
+       -moz-transform: translateZ(0) translateY(-140%);
+        -ms-transform: translateZ(0) translateY(-140%);
+            transform: translateZ(0) translateY(-140%);
 
 
     -webkit-transition: opacity 0.5s,
-                        top 0.5s,
-                        margin-top 0.5s;
+                        -webkit-transform 0.5s;
        -moz-transition: opacity 0.5s,
-                        top 0.5s,
-                        margin-top 0.5s;
+                        -moz-transform 0.5s;
         -ms-transition: opacity 0.5s,
-                        top 0.5s,
-                        margin-top 0.5s;
+                        -ms-transform 0.5s;
             transition: opacity 0.5s,
-                        top 0.5s,
-                        margin-top 0.5s;
+                        transform 0.5s;
 }
 .show-in-big .big-card {
     opacity: 1;
+    -webkit-transform: translateZ(0) translateY(0);
+    -moz-transform: translateZ(0) translateY(0);
+    -ms-transform: translateZ(0) translateY(0);
+    transform: translateZ(0) translateY(0);
 }
 .small-card {
     margin: 10px;
@@ -270,9 +270,6 @@ body {
         line-height: 275px;
         margin-left: -105px; /* -width/2 - 10px border */
         width: 190px;
-    }
-    .show-in-big .big-card {
-        top: 50%;
         margin-top: -147px;
     }
 }
@@ -289,10 +286,9 @@ body {
         height: 315px;
         width: 230px;
         margin-left: -125px; /* -width/2 - 10px border */
+        margin-top: -168px;
     }
     .show-in-big .big-card {
-        top: 50%;
-        margin-top: -168px;
     }
 }
 @media (min-height: 760px) {
@@ -309,11 +305,10 @@ body {
         height: 525px;
         margin-left: -195px; /* -width/2 - 20px border*/
         width: 350px;
+        margin-top: -283px;
     }
 
     .show-in-big .big-card {
-        top: 50%;
-        margin-top: -283px;
     }
 }
 @media (max-width: 329px) and (max-height: 359px){
