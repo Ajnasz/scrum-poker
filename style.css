@@ -181,18 +181,20 @@ body {
     background: #000;
     position: fixed;
     bottom: 0;
+    opacity: 0;
     width: 100%;
     z-index: 2;
     opacity: 0.85;
+    visibility: hidden;
 
     -webkit-transition: opacity 1s 0.4s, -webkit-transform 0.5s;
        -moz-transition: opacity 1s 0.4s, -moz-transform 0.5s;
         -ms-transition: opacity 1s 0.4s, -ms-transform 0.5s;
             transition: opacity 1s 0.4s, transform 0.5s;
-    -webkit-transform: translateY(0);
-       -moz-transform: translateY(0);
-        -ms-transform: translateY(0);
-            transform: translateY(0);
+    -webkit-transform: translateY(4em);
+       -moz-transform: translateY(4em);
+        -ms-transform: translateY(4em);
+            transform: translateY(4em);
 
     /*
     display: -moz-flex;
@@ -201,11 +203,18 @@ body {
     justify-content: space-around;
     */
 }
-.show-in-big #Toolbar {
-    -webkit-transform: translateY(3.5rem);
-       -moz-transform: translateY(3.5rem);
-        -ms-transform: translateY(3.5rem);
-            transform: translateY(3.5rem);
+#Toolbar.loaded {
+    visibility: visible;
+    -webkit-transform: translateY(0em);
+       -moz-transform: translateY(0em);
+        -ms-transform: translateY(0em);
+            transform: translateY(0em);
+}
+.show-in-big #Toolbar.loaded {
+    -webkit-transform: translateY(3.5em);
+       -moz-transform: translateY(3.5em);
+        -ms-transform: translateY(3.5em);
+            transform: translateY(3.5em);
 }
 .toolbar-button-wrapper {
     margin: 0.5rem;
