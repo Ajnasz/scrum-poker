@@ -102,7 +102,8 @@
         }
 
         function getTransformCss(width, height) {
-            return 'translate(' + getTranslateVal(width + getRandomInt(0, 300)) + 'px,' + getTranslateVal(height + getRandomInt(100, 300)) + 'px) translateZ(0)';
+            return 'translate(' + getTranslateVal(width + getRandomInt(0, 300)) + 'px,' +
+                getTranslateVal(height + getRandomInt(100, 300)) + 'px) translateZ(0)';
         }
 
         function removeCards(callback) {
