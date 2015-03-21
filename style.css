@@ -2,7 +2,10 @@
     font-family: 'FireSans';
     font-style: normal;
     font-weight: 400;
-    src: url('fonts/FiraSans-Regular.woff') format('woff');
+    src:
+		url('fonts/FiraSans-Regular.woff2') format('woff2'),
+		url('fonts/FiraSans-Regular.woff') format('woff')
+		;
 }
 
 html {
