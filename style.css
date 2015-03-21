@@ -159,24 +159,12 @@ body {
     vertical-align: middle;
     width: 100%;
 
-    /*
-    -webkit-backface-visibility: hidden;
-       -moz-backface-visibility: hidden;
-        -ms-backface-visibility: hidden;
-            backface-visibility: hidden;
-    */
+	text-shadow: 0 0 1px #000;
 }
-/*
-.card-side.back {
-    background-color: #449AC8;
 
-    -webkit-transform: rotateY(180deg);
-       -moz-transform: rotateY(180deg);
-        -ms-transform: rotateY(180deg);
-            transform: rotateY(180deg);
+.big-card .card-side {
+	text-shadow: 0 0 3px #000;
 }
-*/
-
 .card-side img {
     width: 90%;
     vertical-align: middle;
