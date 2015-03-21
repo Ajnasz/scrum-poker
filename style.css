@@ -62,10 +62,10 @@ body {
     z-index: 2;
 }
 .card.remove {
-    -webkit-transform: translateX(-700px);
-       -moz-transform: translateX(-700px);
-        -ms-transform: translateX(-700px);
-            transform: translateX(-700px);
+    -webkit-transform: translateX(-700px) translateZ(0);
+       -moz-transform: translateX(-700px) translateZ(0);
+        -ms-transform: translateX(-700px) translateZ(0);
+            transform: translateX(-700px) translateZ(0);
 }
 .big-card {
     position: fixed;
@@ -75,10 +75,10 @@ body {
     margin-right: 0;
     opacity: 0;
 
-    -webkit-transform: translateZ(0) translateY(-140%);
-       -moz-transform: translateZ(0) translateY(-140%);
-        -ms-transform: translateZ(0) translateY(-140%);
-            transform: translateZ(0) translateY(-140%);
+    -webkit-transform: translateZ(0) translateY(-140%) scale(1.5);
+       -moz-transform: translateZ(0) translateY(-140%) scale(1.5);
+        -ms-transform: translateZ(0) translateY(-140%) scale(1.5);
+            transform: translateZ(0) translateY(-140%) scale(1.5);
 
 
     -webkit-transition: opacity 0.5s,
@@ -92,10 +92,10 @@ body {
 }
 .show-in-big .big-card {
     opacity: 1;
-    -webkit-transform: translateZ(0) translateY(0);
-    -moz-transform: translateZ(0) translateY(0);
-    -ms-transform: translateZ(0) translateY(0);
-    transform: translateZ(0) translateY(0);
+    -webkit-transform: translateZ(0) translateY(0) scale(1);
+    -moz-transform: translateZ(0) translateY(0) scale(1);
+    -ms-transform: translateZ(0) translateY(0) scale(1);
+    transform: translateZ(0) translateY(0) scale(1);
 }
 .small-card {
     margin: 10px;
