@@ -118,10 +118,11 @@ body {
     opacity: 0;
     left: -9999px;
     top: -9999px;
-   -webkit-transition: opacity 1s 0.5s, top 0.2s;
-      -moz-transition: opacity 1s 0.5s, top 0.2s;
-       -ms-transition: opacity 1s 0.5s, top 0.2s;
-           transition: opacity 1s 0.5s, top 0.2s;
+
+   -webkit-transition: opacity 1s 0.5s;
+      -moz-transition: opacity 1s 0.5s;
+       -ms-transition: opacity 1s 0.5s;
+           transition: opacity 1s 0.5s;
 }
 .show-in-big #CoverLayer {
     background-color: #000;
