@@ -98,11 +98,12 @@
         }
 
         function getTranslateVal(value) {
+			return value;
             return (Math.floor(Math.random() * 10) % 2 ? '-' : '') + getRandomInt(value, value);
         }
 
         function getTransformCss(width, height) {
-            return 'translate(' + getTranslateVal(width + getRandomInt(0, 300)) + 'px,' +
+            return 'translate(' + 0 + 'px,' +
                 getTranslateVal(height + getRandomInt(100, 300)) + 'px) translateZ(0)';
         }
 
@@ -188,7 +189,7 @@
 
             removeCards.call(this, function () {
                 var fragment = document.createDocumentFragment();
-                cards.map(createCard.bind(this)).forEach(function (card) {
+                cards.map(createCard.bind(this)).forEach(function (card, index) {
                     var transform = getTransformCss(width, height);
 
                     transformCard(card, transform);
@@ -196,8 +197,8 @@
 
                     setTimeout(function () {
                         transformCard(card, '');
-                    }, 0);
-                }.bind(this));
+                    }, index * 50);
+                });
 
                 this.byId(this.place).appendChild(fragment);
             }.bind(this));

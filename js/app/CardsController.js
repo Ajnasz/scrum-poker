@@ -1,5 +1,6 @@
 (function (stampit, spoker) {
-    spoker.CardsController = stampit.compose(spoker.Controller, stampit().enclose(function (){
+	'use strict';
+    spoker.CardsController = stampit.compose(spoker.Controller, stampit().enclose(function () {
         this.setup = function () {
             this.model.on('change.cardSet', function (value) {
                 var cardSet;
@@ -20,7 +21,7 @@
 
                 if (!this.model.get('isBigCardVisible')) {
                     cardValue = this.view.getCardValue(target);
-                    
+
                     if (cardValue) {
                         this.model.set('selectedCard', cardValue);
                     }
