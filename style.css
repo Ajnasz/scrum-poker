@@ -51,7 +51,7 @@ body {
 }
 .card {
     float: left;
-    height: 150px;
+    height: 100vh;
     line-height: 150px;
     padding: 0;
     position: relative;
@@ -95,6 +95,15 @@ body {
        -moz-transform: translateZ(0) translateY(0);
         -ms-transform: translateZ(0) translateY(0);
             transform: translateZ(0) translateY(0);
+
+    -webkit-transition: opacity 0.5s 0.3s,
+                        -webkit-transform 0.5s 0.3s;
+       -moz-transition: opacity 0.5s 0.3s,
+                        -moz-transform 0.5s 0.3s;
+        -ms-transition: opacity 0.5s 0.3s,
+                        -ms-transform 0.5s 0.3s;
+            transition: opacity 0.5s 0.3s,
+                        transform 0.5s 0.3s;
 }
 .small-card {
     margin: 10px;
@@ -122,10 +131,10 @@ body {
     width: 100%;
     z-index: 2;
 
-   -webkit-transition: opacity 1s 0.5s;
-      -moz-transition: opacity 1s 0.5s;
-       -ms-transition: opacity 1s 0.5s;
-           transition: opacity 1s 0.5s;
+   -webkit-transition: opacity 1s;
+      -moz-transition: opacity 1s;
+       -ms-transition: opacity 1s;
+           transition: opacity 1s;
 }
 /*
 .show-in-big .small-card {
@@ -184,12 +193,10 @@ body {
         -ms-transform: translateY(4em);
             transform: translateY(4em);
 
-    /*
     display: -moz-flex;
     display: flex;
     align-content: center;
     justify-content: space-around;
-    */
 }
 #Toolbar.loaded {
     visibility: visible;
@@ -227,12 +234,12 @@ body {
     line-height: 3rem;
     margin: 0;
     white-space: nowrap;
+    /*
     width: 33.33333%;
     float: left;
-    /*
+    */
     -moz-box-flex: 1 100%;
     flex: 1 100%;
-    */
 }
 .toolbar-button:first-child {
 }
