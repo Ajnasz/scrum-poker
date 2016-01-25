@@ -4,8 +4,10 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <title>Scrum Poker Webapp</title>
+    <title>Scrum Poker</title>
     <meta name="description" content="Web application to agile development, like scrum or kanban. Planning poker will help you to estimate story complexity.">
     <style type="text/css">
         @import url(style.css);
@@ -26,18 +28,16 @@
     <script src="js/app/app.js"></script>
 </head>
 <body>
-    <div id="PokerPlace">
-    </div>
-    <div class="card big-card" id="DisplayedCard">
-        <div class="card-side front"></div>
-    </div>
-    <div id="Toolbar" class="active-standard">
-        <div class="toolbar-button-wrapper">
-        <button type="button" class="toolbar-button" data-cardtype="standard" id="CardTypeSelectStandard">Standard</button>
-        <button type="button" class="toolbar-button" data-cardtype="tshirt" id="CardTypeSelectTshirt">T-Shirt</button>
-        <button type="button" class="toolbar-button" data-cardtype="fibonacci" id="CardTypeSelectFibonacci">Fibonacci</button>
-        </div>
-    </div>
-    <div id="CoverLayer"></div>
+<div id="PokerPlace">
+</div>
+<div class="card big-card" id="DisplayedCard">
+    <div class="card-side front"></div>
+</div>
+<div id="Toolbar" class="active-standard">
+    <button type="button" class="toolbar-button" data-cardtype="standard" id="CardTypeSelectStandard">Standard</button>
+    <button type="button" class="toolbar-button" data-cardtype="tshirt" id="CardTypeSelectTshirt">T-Shirt</button>
+    <button type="button" class="toolbar-button" data-cardtype="fibonacci" id="CardTypeSelectFibonacci">Fibonacci</button>
+</div>
+<div id="CoverLayer"></div>
 </body>
 </html>
