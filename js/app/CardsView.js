@@ -135,10 +135,15 @@
         }
 
         function transformCard(card, transform) {
-            card.style.WebkitTransform = transform;
-            card.style.MozTransform = transform;
-            card.style.MsTransform = transform;
-            card.style.transform = transform;
+            if (transform) {
+                card.classList.add('transforming');
+            } else {
+                card.classList.remove('transforming');
+            }
+            // card.style.WebkitTransform = transform;
+            // card.style.MozTransform = transform;
+            // card.style.MsTransform = transform;
+            // card.style.transform = transform;
         }
 
         this.removeCards = function removeCards(callback) {

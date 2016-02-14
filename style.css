@@ -58,11 +58,16 @@ body {
     width: 100px;
     z-index: 2;
 }
+
+.card.transforming {
+	transform: translateY(100vh) translateZ(0);
+}
+
 .card.remove {
-    -webkit-transform: translateX(-700px) translateZ(0);
-       -moz-transform: translateX(-700px) translateZ(0);
-        -ms-transform: translateX(-700px) translateZ(0);
-            transform: translateX(-700px) translateZ(0);
+    -webkit-transform: translateX(-100vw) translateZ(0);
+       -moz-transform: translateX(-100vw) translateZ(0);
+        -ms-transform: translateX(-100vw) translateZ(0);
+            transform: translateX(-100vw) translateZ(0);
 }
 .big-card {
     position: fixed;
