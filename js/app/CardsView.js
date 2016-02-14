@@ -1,4 +1,6 @@
 (function (stampit, spoker) {
+    'use strict';
+
     spoker.CardsView = stampit.compose(spoker.cardHelper, stampit.compose(spoker.View, stampit().enclose(function () {
         var CARD_CLASS_NAME = 'card',
             SMALL_CARD_CLASS_NAME = 'small-card',
@@ -8,11 +10,9 @@
             placeClickEnabled = true,
             cardCache;
 
-        /*jslint eqeq: true*/
         function truthy(elem) {
-            return elem != null;
+            return elem ? true : false;
         }
-        /*jslint eqeq: false*/
 
         function setAttributes(element) {
             return function (attrib) {
@@ -107,47 +107,6 @@
                 getTranslateVal(height + getRandomInt(100, 300)) + 'px) translateZ(0)';
         }
 
-        function removeCards(callback) {
-            var place = this.byId(this.place),
-                children = this.toArray(place.childNodes),
-                width = place.offsetWidth,
-                height = place.offsetHeight;
-
-            function realCardRemove(card) {
-                place.removeChild(card);
-
-                if (!place.firstChild) {
-                    callback();
-                }
-            }
-
-            function onTransitionEnd() {
-                var card = this;
-                if (card.classList.contains('remove')) {
-                    card.removeEventListener('transitionend', onTransitionEnd, false);
-                    realCardRemove(card);
-                }
-            }
-
-            function markCardForRemove(card) {
-                card.addEventListener('transitionend', onTransitionEnd, false);
-                card.classList.add('remove');
-                transformCard(card, getTransformCss(width, height));
-            }
-
-            if (children.length) {
-                children.forEach(function (card) {
-                    if (card.nodeType === 1) {
-                        markCardForRemove(card);
-                    } else {
-                        realCardRemove(card);
-                    }
-                }.bind(this));
-            } else {
-                callback();
-            }
-        }
-
         function disablePlaceClick() {
             placeClickEnabled = false;
         }
@@ -182,26 +141,68 @@
             card.style.transform = transform;
         }
 
-        this.renderCards = function (cards) {
+        this.removeCards = function removeCards(callback) {
+            var place = this.byId(this.place),
+                children = this.toArray(place.childNodes),
+                width = place.offsetWidth,
+                height = place.offsetHeight;
+
+            function realCardRemove(card) {
+                place.removeChild(card);
+
+                if (!place.firstChild) {
+                    callback();
+                }
+            }
+
+            function onTransitionEnd() {
+                var card = this;
+
+                if (card.classList.contains('remove')) {
+                    card.removeEventListener('transitionend', onTransitionEnd, false);
+                    realCardRemove(card);
+                }
+            }
+
+            function markCardForRemove(card) {
+                card.addEventListener('transitionend', onTransitionEnd, false);
+                card.classList.add('remove');
+                transformCard(card, getTransformCss(width, height));
+            }
+
+            if (children.length) {
+                children.forEach(function (card) {
+                    if (card.nodeType === 1) {
+                        markCardForRemove(card);
+                    } else {
+                        realCardRemove(card);
+                    }
+                });
+            } else {
+                callback();
+            }
+        };
+
+        this.addCards = function addCards(cards) {
             var place = this.byId(this.place),
                 width = place.offsetWidth,
                 height = place.offsetHeight;
 
-            removeCards.call(this, function () {
-                var fragment = document.createDocumentFragment();
-                cards.map(createCard.bind(this)).forEach(function (card, index) {
-                    var transform = getTransformCss(width, height);
+            var fragment = document.createDocumentFragment();
 
-                    transformCard(card, transform);
-                    fragment.appendChild(card);
+            cards.map(createCard.bind(this)).forEach(function (card, index) {
+                var transform = getTransformCss(width, height);
 
-                    setTimeout(function () {
-                        transformCard(card, '');
-                    }, index * 50);
-                });
+                transformCard(card, transform);
 
-                this.byId(this.place).appendChild(fragment);
-            }.bind(this));
+                fragment.appendChild(card);
+
+                setTimeout(function () {
+                    transformCard(card, '');
+                }, index * 50);
+            });
+
+            this.byId(this.place).appendChild(fragment);
         };
 
         this.getCardValue = function (card) {
@@ -235,4 +236,4 @@
             }.bind(this));
         };
     })));
-}(window.stampit, window.spoker || {}));
+}(this.stampit, this.spoker || {}));

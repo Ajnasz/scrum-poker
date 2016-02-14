@@ -1,19 +1,27 @@
 (function (stampit, spoker) {
-	'use strict';
+    'use strict';
     spoker.CardsController = stampit.compose(spoker.Controller, stampit().enclose(function () {
+
+        function getCardSet(model) {
+            var value = model.get('cardSet');
+            var cardSet;
+
+            if (value === spoker.ToolbarView.CARD_TYPES.TSHIRT) {
+                cardSet = model.getTshirt();
+            } else if (value === spoker.ToolbarView.CARD_TYPES.FIBONACCI) {
+                cardSet = model.getFibonacci();
+            } else {
+                cardSet = model.getStandard();
+            }
+
+            return cardSet;
+        }
         this.setup = function () {
-            this.model.on('change.cardSet', function (value) {
-                var cardSet;
-
-                if (value === spoker.ToolbarView.CARD_TYPES.TSHIRT) {
-                    cardSet = this.model.getTshirt();
-                } else if (value === spoker.ToolbarView.CARD_TYPES.FIBONACCI) {
-                    cardSet = this.model.getFibonacci();
-                } else {
-                    cardSet = this.model.getStandard();
-                }
-
-                this.view.renderCards(cardSet);
+            this.model.on('change.cardSet', function () {
+                this.view.removeCards(function () {
+                    this.view.addCards(getCardSet(this.model));
+                }.bind(this));
+                // this.view.renderCards(cardSet);
             }.bind(this));
 
             this.view.on('placeClick', function (target) {
