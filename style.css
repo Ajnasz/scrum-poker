@@ -3,9 +3,9 @@
     font-style: normal;
     font-weight: 400;
     src:
-		url('fonts/FiraSans-Regular.woff2') format('woff2'),
-		url('fonts/FiraSans-Regular.woff') format('woff')
-		;
+        url('fonts/FiraSans-Regular.woff2') format('woff2'),
+        url('fonts/FiraSans-Regular.woff') format('woff')
+        ;
 }
 
 html {
@@ -60,7 +60,10 @@ body {
 }
 
 .card.transforming {
-	transform: translateY(100vh) translateZ(0);
+    -webkit-transform: translateY(100vh) translateZ(0);
+       -moz-transform: translateY(100vh) translateZ(0);
+        -ms-transform: translateY(100vh) translateZ(0);
+            transform: translateY(100vh) translateZ(0);
 }
 
 .card.remove {
@@ -167,11 +170,11 @@ body {
     vertical-align: middle;
     width: 100%;
 
-	text-shadow: 0 0 1px #000;
+    text-shadow: 0 0 1px #000;
 }
 
 .big-card .card-side {
-	text-shadow: 0 0 3px #000;
+    text-shadow: 0 0 3px #000;
 }
 .card-side img {
     width: 90%;
