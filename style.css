@@ -124,7 +124,7 @@ body {
 #CoverLayer {
     background-color: #000;
     display: block;
-    position: absolute;
+    position: fixed;
     opacity: 0;
     left: -9999px;
     top: -9999px;
