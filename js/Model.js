@@ -1,4 +1,5 @@
 (function (stampit, spoker) {
+	'use strict';
     spoker.Model = stampit.compose(spoker.Events, stampit().enclose(function () {
         var data = {};
 
@@ -14,7 +15,11 @@
             }
         };
         this.get = function (name) {
-            return data[name];
+			if (name in data) {
+				return data[name];
+			}
+
+			return;
         };
     }));
 }(window.stampit, window.spoker = window.spoker || {}));

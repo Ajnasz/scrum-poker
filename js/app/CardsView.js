@@ -99,7 +99,7 @@
 
         function getTranslateVal(value) {
 			return value;
-            return (Math.floor(Math.random() * 10) % 2 ? '-' : '') + getRandomInt(value, value);
+            // return (Math.floor(Math.random() * 10) % 2 ? '-' : '') + getRandomInt(value, value);
         }
 
         function getTransformCss(width, height) {
