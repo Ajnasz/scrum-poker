@@ -173,6 +173,16 @@ body {
     text-shadow: 0 0 1px #000;
 }
 
+.offline .card-side {
+    background: #8bc34a; /* Old browsers */
+    background: -moz-linear-gradient(top,  #8bc34a 0%, #4caf50 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8bc34a), color-stop(100%,#4caf50)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #8bc34a 0%,#4caf50 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #8bc34a 0%,#4caf50 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #8bc34a 0%,#4caf50 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #8bc34a 0%,#4caf50 100%); /* W3C */
+}
+
 .big-card .card-side {
     text-shadow: 0 0 3px #000;
 }
