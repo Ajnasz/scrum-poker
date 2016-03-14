@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html manifest="scrumpoker.appcache">
+<html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta charset="utf-8">
@@ -19,20 +19,66 @@
     <style type="text/css">
         @import url(style.css);
     </style>
-    <script src="js/stampit.min.js"></script>
-    <script src="js/Util.js"></script>
-    <script src="js/Events.js"></script>
-    <script src="js/View.js"></script>
-    <script src="js/Model.js"></script>
-    <script src="js/app/CardsModel.js"></script>
-    <script src="js/app/ToolbarView.js"></script>
-    <script src="js/app/cardHelper.js"></script>
-    <script src="js/app/CardsView.js"></script>
-    <script src="js/app/BigCardView.js"></script>
-    <script src="js/app/BigCardController.js"></script>
-    <script src="js/app/ToolbarController.js"></script>
-    <script src="js/app/CardsController.js"></script>
-    <script src="js/app/app.js"></script>
+	<script>
+		(function () {
+			function addScript(src) {
+				return new Promise(function (resolve, reject) {
+					var s = document.createElement('script');
+					s.onerror = reject;
+					s.onload = resolve;
+					s.src = src;
+					document.head.appendChild(s);
+				});
+			}
+
+
+			var scripts = [
+				'js/stampit.min.js',
+				'js/Util.js',
+				'js/Events.js',
+				[
+					'js/View.js',
+					'js/Controller.js',
+					'js/Model.js',
+					'js/app/cardHelper.js',
+				],
+				[
+					'js/app/CardsModel.js',
+					'js/app/ToolbarView.js',
+					'js/app/CardsView.js',
+					'js/app/BigCardView.js',
+					'js/app/BigCardController.js',
+					'js/app/ToolbarController.js',
+					'js/app/CardsController.js',
+				],
+				'js/app/app.js'
+			];
+
+
+			function addScripts() {
+
+				if (scripts.length) {
+					var item = scripts.shift();
+					if (Array.isArray(item)) {
+						Promise.all(item.map(addScript)).then(addScripts);
+					} else {
+						addScript(item).then(addScripts).catch(function (e) {
+							throw e;
+						});
+					}
+				}
+			}
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('/service.js').then(function (reg) {
+					addScripts();
+				}).catch(function(error) {
+					// registration failed
+					addScripts();
+				});
+			}
+		}());
+
+	</script>
 </head>
 <body>
     <div id="PokerPlace">

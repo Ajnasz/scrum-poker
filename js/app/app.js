@@ -36,8 +36,17 @@
         model.set('cardSet', toolbarView.getSelectedCardSet());
     }
 
-    window.addEventListener('load', function () {
-        setTimeout(init, 100);
-    }, false);
+	function isLoaded() {
+		var readyState = document.readyState;
 
+		return readyState === 'complete' || readyState === 'loaded' || readyState === 'interactive';
+	}
+
+	if (isLoaded()) {
+		init();
+	} else {
+		window.addEventListener('DOMContentLoaded', function () {
+			setTimeout(init, 100);
+		}, false);
+	}
 }(window.spoker || {}));
