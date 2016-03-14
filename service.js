@@ -25,7 +25,7 @@ var urlsToCache = [
 ];
 
 
-var cacheName = 'scrumpoker-v1.0.0';
+var cacheName = 'scrumpoker-v1.0.1';
 
 self.addEventListener('activate', function (event) {
 	'use strict';
@@ -50,25 +50,31 @@ self.addEventListener('install', function (e) {
 	}));
 }, false);
 
+function serveRightFromCache(event) {
+	'use strict';
+	return caches.open(cacheName).then(function (cache) {
+		return cache.match(event.request);
+	}).catch(function () {
+		return fetch(event.request);
+	});
+}
+
+function serveOnline(event, alias) {
+	'use strict';
+
+	return fetch(event.request).catch(function() {
+		return caches.open(cacheName).then(function (cache) {
+			return cache.match(alias || event.request);
+		});
+	});
+}
+
 self.addEventListener('fetch', function (event) {
 	'use strict';
 	
-	event.respondWith(
-	fetch(event.request).then(function (response) {
-		var responseToCache = response.clone();
-
-		caches.open(cacheName).then(function (cache) {
-			cache.put(event.request, responseToCache);
-		});
-
-		return response;
-	}).catch(function () {
-		return caches.open(cacheName).then(function (cache) {
-			if (/\.[a-z]{2,5}$/i.test(event.request.url)) {
-				return caches.match(event.request);
-			} else {
-				return cache.match('offline.html');
-			}
-		});
-	}));
+	if (new URL(event.request.url).pathname === '/') {
+		event.respondWith(serveOnline(event, '/offline.html'));
+	} else {
+		event.respondWith(serveRightFromCache(event));
+	}
 }, false);
