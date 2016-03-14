@@ -24,7 +24,8 @@ var urlsToCache = [
 	'/js/app/app.js'
 ];
 
-var cacheName = 'scrumpoker-v1';
+
+var cacheName = 'scrumpoker-v1.0.0';
 
 self.addEventListener('activate', function (event) {
 	'use strict';
