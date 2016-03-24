@@ -25,7 +25,7 @@ var urlsToCache = [
 ];
 
 
-var cacheName = 'scrumpoker-v1.0.1';
+var cacheName = 'scrumpoker-v1.0.2';
 
 self.addEventListener('activate', function (event) {
 	'use strict';
@@ -71,7 +71,7 @@ function serveOnline(event, alias) {
 
 self.addEventListener('fetch', function (event) {
 	'use strict';
-	
+
 	if (new URL(event.request.url).pathname === '/') {
 		event.respondWith(serveOnline(event, '/offline.html'));
 	} else {
