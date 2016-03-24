@@ -61,6 +61,8 @@ function serveRightFromCache(event) {
 		}
 
 		return Promise.resolve(response);
+	}).catch(function () {
+		return fetch(event.request);
 	});
 }
 
