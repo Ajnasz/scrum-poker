@@ -160,8 +160,8 @@
                 }
             }
 
-            function onTransitionEnd() {
-                var card = this;
+            function onTransitionEnd(e) {
+                var card = e.target;
 
                 if (card.classList.contains('remove')) {
                     card.removeEventListener('transitionend', onTransitionEnd, false);

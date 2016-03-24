@@ -62,7 +62,7 @@ function serveRightFromCache(event) {
 function serveOnline(event, alias) {
 	'use strict';
 
-	return fetch(event.request).catch(function() {
+	return fetch(event.request, {cache: 'no-cache'}).catch(function() {
 		return caches.open(cacheName).then(function (cache) {
 			return cache.match(alias || event.request);
 		});
