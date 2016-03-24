@@ -52,10 +52,15 @@ self.addEventListener('install', function (e) {
 
 function serveRightFromCache(event) {
 	'use strict';
+
 	return caches.open(cacheName).then(function (cache) {
 		return cache.match(event.request);
-	}).catch(function () {
-		return fetch(event.request);
+	}).then(function (response) {
+		if (typeof response === 'undefined') {
+			return fetch(event.request);
+		}
+
+		return Promise.resolve(response);
 	});
 }
 
