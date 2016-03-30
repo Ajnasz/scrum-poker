@@ -97,13 +97,20 @@ body {
             transform: translateZ(0);
 }
 .card {
-    float: left;
-    height: 100vh;
-    line-height: 150px;
-    padding: 0;
-    position: relative;
-    width: 100px;
-    z-index: 2;
+	float: left;
+	height: 100vh;
+	line-height: 150px;
+	padding: 0;
+	position: relative;
+	width: 100px;
+	z-index: 2;
+
+	-webkit-touch-callout: none; /* iOS Safari */
+	  -webkit-user-select: none; /* Chrome/Safari/Opera */
+	   -khtml-user-select: none; /* Konqueror */
+	     -moz-user-select: none; /* Firefox */
+	      -ms-user-select: none; /* IE/Edge */
+	          user-select: none; /* non-prefixed version, currently not supported by any browser */
 }
 
 .card.transforming {
