@@ -1,29 +1,53 @@
 (function (stampit, spoker) {
-    spoker.BigCardView = stampit.compose(spoker.cardHelper, stampit.compose(spoker.View, stampit().enclose(function () {
+	'use strict';
+
+    spoker.BigCardView = stampit.compose(spoker.cardHelper, stampit.compose(spoker.View, stampit().init(function () {
         this.showCard = function (cardValue) {
-            var card = this.byId(this.card);
-            card.querySelector('.card-side.front').innerHTML = this.cardValueToHTML(cardValue);
-            document.body.classList.add('show-in-big');
-            this.emit('cardShow');
+            var card = this.byId(this.card),
+				front;
+
+            front = card.querySelector('.card-side.front');
+
+			this.empty(front);
+
+			front.insertAdjacentHTML('afterbegin', this.cardValueToHTML(cardValue));
+            document.body.classList.add('show-in-big', 'animate-big');
         };
 
         this.hideCard = function () {
-            document.body.classList.remove('show-in-big');
-            this.emit('cardHide');
+			var body = document.body;
+
+            body.classList.remove('show-in-big');
+            body.classList.add('animate-big');
         };
 
-        this.isVisible = function () {
-            return document.body.classList.contains('show-in-big');
-        };
+		this.onAnimationEnd = function (e) {
+			switch (e.animationName) {
+				case  'slide-card-up':
+					this.emit('cardHide');
+					break;
+				case  'slide-card-down':
+					this.emit('cardShow');
+					break;
+			}
+		};
+
 
         this.setup = function () {
-            this.listen(document.body, 'touchend', function () {
-                this.emit('requestHide');
-            }.bind(this));
+			var body = document.body,
+				card = this.byId(this.card);
 
-            this.listen(document.body, 'click', function () {
+			this.onTouchEnd(body, function () {
+				this.emit('requestHide');
+			}.bind(this));
+
+			this.onClick(body, function () {
                 this.emit('requestHide');
-            }.bind(this));
+			}.bind(this));
+
+			card.addEventListener('webkitAnimationEnd', this.onAnimationEnd.bind(this), false);
+			card.addEventListener('MSAnimationEnd', this.onAnimationEnd.bind(this), false);
+			card.addEventListener('animationend', this.onAnimationEnd.bind(this), false);
         };
     })));
 }(window.stampit, window.spoker || {}));

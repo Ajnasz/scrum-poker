@@ -31,5 +31,12 @@
             }
             this.listen(elem, DOM_EVENTS.TOUCHEND, cb);
         };
+
+		this.empty = function (elem) {
+			while (elem.hasChildNodes()) {
+				elem.removeChild(elem.firstChild);
+			}
+		};
+
     }));
 }(window.stampit, window.spoker = window.spoker || {}));

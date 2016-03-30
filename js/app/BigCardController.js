@@ -1,28 +1,18 @@
 (function (stampit, spoker) {
-    spoker.BigCardController = stampit.compose(spoker.Controller, stampit().enclose(function (){
-        var showingBig = false;
+	'use strict';
 
+    spoker.BigCardController = stampit.compose(spoker.Controller, stampit().enclose(function (){
         this.setup = function () {
             this.model.on('change.selectedCard', function (value) {
                 if (value) {
-                    if (!showingBig) {
-                        this.view.showCard(value);
-                        setTimeout(function () {
-                            showingBig = true;
-                        }, 300);
-                    }
+					this.view.showCard(value);
                 } else {
-                    if (showingBig) {
-                        this.view.hideCard();
-                        setTimeout(function () {
-                            showingBig = false;
-                        }, 300);
-                    }
+					this.view.hideCard();
                 }
             }.bind(this));
 
             this.view.on('requestHide', function () {
-                if (this.model.get('isBigCardVisible') && showingBig) {
+                if (this.model.get('isBigCardVisible')) {
                     this.model.set('selectedCard', null);
                 }
             }.bind(this));
