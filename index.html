@@ -55,14 +55,15 @@
 			];
 
 
-			function addScripts() {
+			function addScripts(scripts) {
 
 				if (scripts.length) {
 					var item = scripts.shift();
+
 					if (Array.isArray(item)) {
-						Promise.all(item.map(addScript)).then(addScripts);
+						Promise.all(item.map(addScript)).then(addScripts.bind(null, scripts));
 					} else {
-						addScript(item).then(addScripts).catch(function (e) {
+						addScript(item).then(addScripts.bind(null, scripts)).catch(function (e) {
 							throw e;
 						});
 					}
@@ -70,14 +71,14 @@
 			}
 			if ('serviceWorker' in navigator) {
 				navigator.serviceWorker.register('/service.js').then(function (reg) {
-					addScripts();
+					addScripts(scripts);
 				}).catch(function(error) {
 					console.error(error);
-					addScripts();
+					addScripts(scripts);
 					// registration failed
 				});
 			} else {
-				addScripts();
+				addScripts(scripts);
 			}
 		}());
 
