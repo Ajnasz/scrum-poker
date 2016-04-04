@@ -56,6 +56,16 @@
         ;
 }
 
+@font-face {
+    font-family: 'FireSans';
+    font-style: normal;
+    font-weight: 700;
+    src:
+        url('/fonts/FiraSans-Bold.woff2') format('woff2'),
+        url('/fonts/FiraSans-Bold.woff') format('woff')
+        ;
+}
+
 html {
     background-color: #222b2d;
     margin: 0;
@@ -88,7 +98,7 @@ body {
     border-radius: 10px;
     color: #fff;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 30px;
     text-align: center;
 

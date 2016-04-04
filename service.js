@@ -6,6 +6,8 @@ var urlsToCache = [
 	'/style.css',
 	'/fonts/FiraSans-Regular.woff',
 	'/fonts/FiraSans-Regular.woff2',
+	'/fonts/FiraSans-Bold.woff',
+	'/fonts/FiraSans-Bold.woff2',
 	'/images/CoffeeCup.svg',
 	'/js/stampit.min.js',
 	'/js/Util.js',
