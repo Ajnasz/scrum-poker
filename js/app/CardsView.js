@@ -156,6 +156,7 @@
                 place.removeChild(card);
 
                 if (!place.firstChild) {
+                    window.scrollTo(0, 0);
                     callback();
                 }
             }

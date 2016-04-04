@@ -16,6 +16,7 @@
 
             return cardSet;
         }
+
         this.setup = function () {
             this.model.on('change.cardSet', function () {
                 this.view.removeCards(function () {
