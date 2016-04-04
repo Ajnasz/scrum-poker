@@ -218,6 +218,7 @@ body {
     background: linear-gradient(to bottom,  #4dc0f0 0%,#00a0f0 100%); /* W3C */
     border: 1px solid #fff;
     font-family: 'FireSans';
+    font-weight: normal;
     bottom: 0;
     height: 100%;
     position: absolute;
