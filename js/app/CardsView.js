@@ -221,21 +221,26 @@
 
         this.setup = function () {
             // on touch start we enable the place click event
-            this.listen(this.place, this.DOM_EVENTS.TOUCHSTART, function () {
+            this.onTouchStart(this.place, function () {
                 enablePlaceClick();
             });
+
             // but if user moves, disable it
-            this.listen(this.place, this.DOM_EVENTS.TOUCHMOVE, function () {
+            this.onTouchMove(this.place, function () {
                 disablePlaceClick();
             });
-            this.listen(this.place, this.DOM_EVENTS.TOUCHEND, function (event) {
+
+            this.onTouchEnd(this.place, function (event) {
                 if (placeClickEnabled) {
+					event.stopPropagation();
                     disablePlaceClick();
                     this.emit('placeClick', event.target);
                     setTimeout(enablePlaceClick, 300);
                 }
+				enablePlaceClick();
             }.bind(this));
-            this.listen(this.place, this.DOM_EVENTS.CLICK, function (event) {
+
+            this.onClick(this.place, function (event) {
                 if (placeClickEnabled) {
                     this.emit('placeClick', event.target);
                 }
