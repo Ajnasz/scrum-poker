@@ -56,6 +56,26 @@
             return output;
         };
 
+		this.selectNextCardSet = function () {
+			var toolbar = getToolbar.call(this);
+			var next = toolbar.querySelector('[data-cardtype="' + this.getSelectedCardSet() + '"]').nextElementSibling;
+
+			if (next) {
+				this.selectCardSet(next.dataset.cardtype);
+				this.emit('selectCardSet');
+			}
+		};
+
+		this.selectPrevCardSet = function () {
+			var toolbar = getToolbar.call(this);
+			var prev = toolbar.querySelector('[data-cardtype="' + this.getSelectedCardSet() + '"]').previousElementSibling;
+
+			if (prev) {
+				this.selectCardSet(prev.dataset.cardtype);
+				this.emit('selectCardSet');
+			}
+		};
+
         function getCardSetName(toolbarButton) {
             return toolbarButton.dataset.cardtype;
         }
