@@ -1,7 +1,7 @@
 {
   "name": "Scrum poker",
   "description": "A application to make faster and more accurate estimations. It includes the numbered cards along with infinity and the coffee cup card. You can choose from standard card planning poker card set, T-Shirt and Fibonacci numbers.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "launch_path": "/index.html",
   "fullscreen": "true",
   "icons": {
