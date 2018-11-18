@@ -25,7 +25,7 @@
 
         function onStateChange(model, state) {
             if (!state || !state.cardSet) {
-                model.set('cardSet', defaultSet);
+                model.set('cardSet', DEFAULT_SET);
             } else {
                 model.set('cardSet', state.cardSet);
             }
@@ -58,9 +58,9 @@
             }
 
             history.replaceState({
-                cardSet: defaultSet
-            }, '', '?cardSet=' + defaultSet);
-            this.model.set('cardSet', defaultSet);
+                cardSet: DEFAULT_SET
+            }, '', '?cardSet=' + DEFAULT_SET);
+            this.model.set('cardSet', DEFAULT_SET);
         };
     }))
 }(window.stampit, window.spoker || {}));
