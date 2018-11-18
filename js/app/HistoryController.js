@@ -45,7 +45,6 @@
 
 
             window.addEventListener('popstate', function (event) {
-                console.log('pop state', event);
                 onStateChange(this.model, event.state);
             }.bind(this));
 
