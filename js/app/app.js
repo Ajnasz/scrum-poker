@@ -26,7 +26,8 @@
             model: model
         });
         historyController = spoker.HistoryController({
-            model: model
+            model: model,
+            toolbarController: toolbarController
         })
 
         bigCardView.setup();

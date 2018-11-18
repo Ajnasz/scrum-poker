@@ -1,5 +1,5 @@
 (function (stampit, spoker) {
-    spoker.Controller = stampit.compose(spoker.Util, stampit().enclose(function () {
+    spoker.Controller = stampit.compose(spoker.Util, spoker.Events, stampit().enclose(function () {
         this.listenViewEvents = function () {
             var view = this.view,
                 viewEvents = this.viewEvents;

@@ -33,15 +33,15 @@
 
         this.setup = function () {
             var state;
-            this.model.on('change.cardSet', function () {
-                var cardSet = this.get('cardSet');
 
+            this.toolbarController.on('selectCardSet', function (cardSet) {
                 if (isValidCardSet(cardSet)) {
                     history.pushState({
                         cardSet: cardSet,
                     }, '', '?cardSet=' + cardSet)
+                    onStateChange(this.model, history.state);
                 }
-            });
+            }.bind(this));
 
 
             window.addEventListener('popstate', function (event) {
@@ -49,17 +49,14 @@
             }.bind(this));
 
 
-            state = history.state || getStateFromURL();
+            state = history.state || getStateFromURL() || { cardSet: DEFAULT_SET };
 
-            if (state) {
-                this.model.set('cardSet', state.cardSet);
-                return;
+            if (isValidCardSet(state.cardSet)) {
+                history.replaceState({
+                    cardSet: state.cardSet
+                }, '', '?cardSet=' + state.cardSet);
+                onStateChange(this.model, state);
             }
-
-            history.replaceState({
-                cardSet: DEFAULT_SET
-            }, '', '?cardSet=' + DEFAULT_SET);
-            this.model.set('cardSet', DEFAULT_SET);
         };
     }))
 }(window.stampit, window.spoker || {}));

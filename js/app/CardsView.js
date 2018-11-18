@@ -232,12 +232,12 @@
 
             this.onTouchEnd(this.place, function (event) {
                 if (placeClickEnabled) {
-					event.stopPropagation();
+                    event.stopPropagation();
                     disablePlaceClick();
                     this.emit('placeClick', event.target);
                     setTimeout(enablePlaceClick, 300);
                 }
-				enablePlaceClick();
+                enablePlaceClick();
             }.bind(this));
 
             this.onClick(this.place, function (event) {
