@@ -1,7 +1,7 @@
 (function (spoker) {
     'use strict';
     function init() {
-        var model, cardsView, bigCardView, toolbarView, bigCardController, toolbarController, cardsController;
+        var model, cardsView, bigCardView, toolbarView, bigCardController, toolbarController, cardsController, historyController;
 
         model = spoker.CardsModel();
         cardsView = spoker.CardsView({
@@ -25,6 +25,9 @@
             view: cardsView,
             model: model
         });
+        historyController = spoker.HistoryController({
+            model: model
+        })
 
         bigCardView.setup();
         cardsView.setup();
@@ -32,21 +35,20 @@
         bigCardController.setup();
         toolbarController.setup();
         cardsController.setup();
-        toolbarView.selectCardSet(spoker.ToolbarView.CARD_TYPES.STANDARD);
-        model.set('cardSet', toolbarView.getSelectedCardSet());
+        historyController.setup();
     }
 
-	function isLoaded() {
-		var readyState = document.readyState;
+    function isLoaded() {
+        var readyState = document.readyState;
 
-		return readyState === 'complete' || readyState === 'loaded' || readyState === 'interactive';
-	}
+        return readyState === 'complete' || readyState === 'loaded' || readyState === 'interactive';
+    }
 
-	if (isLoaded()) {
-		init();
-	} else {
-		window.addEventListener('DOMContentLoaded', function () {
-			setTimeout(init, 100);
-		}, false);
-	}
+    if (isLoaded()) {
+        init();
+    } else {
+        window.addEventListener('DOMContentLoaded', function () {
+            setTimeout(init, 100);
+        }, false);
+    }
 }(window.spoker || {}));

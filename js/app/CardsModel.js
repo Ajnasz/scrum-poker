@@ -45,4 +45,3 @@
         this.getFibonacci = getFibonacciCards;
     }));
 }(window.stampit, window.spoker || {}));
-

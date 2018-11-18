@@ -62,8 +62,7 @@
 
         function onToolbarUserSelect(event) {
             if (event.target.classList.contains('toolbar-button')) {
-                this.selectCardSet(getCardSetName(event.target));
-                this.emit('selectCardSet');
+                this.emit('selectCardSet', getCardSetName(event.target));
             }
         }
 

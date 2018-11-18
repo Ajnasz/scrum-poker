@@ -22,7 +22,6 @@
                 this.view.removeCards(function () {
                     this.view.addCards(getCardSet(this.model));
                 }.bind(this));
-                // this.view.renderCards(cardSet);
             }.bind(this));
 
             this.view.on('placeClick', function (target) {
