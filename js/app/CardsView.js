@@ -205,7 +205,7 @@
 
                 setTimeout(function () {
                     transformCard(card, '');
-                }, index * 50);
+                }, (index + 1) * 45);
             });
 
             this.byId(this.place).appendChild(fragment);
