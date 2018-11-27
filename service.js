@@ -9,6 +9,21 @@ var urlsToCache = [
 	'/fonts/FiraSans-Bold.woff',
 	'/fonts/FiraSans-Bold.woff2',
 	'/images/CoffeeCup.svg',
+	'/images/icon-128.png',
+	'/images/icon-192.png',
+	'/images/icon-120.png',
+	'/images/icon-128.png',
+	'/images/icon-152.png',
+	'/images/icon-16.png',
+	'/images/icon-180.png',
+	'/images/icon-192.png',
+	'/images/icon-256.png',
+	'/images/icon-32.png',',
+	'/images/icon-57.png',
+	'/images/icon-60.png',
+	'/images/icon-76.png',
+	'/images/icon-90.png',
+	'/images/icon.svg',
 	'/js/stampit.min.js',
 	'/js/Util.js',
 	'/js/Events.js',
@@ -28,7 +43,7 @@ var urlsToCache = [
 ];
 
 
-var cacheName = 'scrumpoker-v1.0.14';
+var cacheName = 'scrumpoker-v1.0.15';
 
 self.addEventListener('activate', function (event) {
 	'use strict';
