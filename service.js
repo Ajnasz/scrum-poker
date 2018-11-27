@@ -22,6 +22,7 @@ var urlsToCache = [
 	'/js/app/BigCardView.js',
 	'/js/app/BigCardController.js',
 	'/js/app/ToolbarController.js',
+	'/js/app/HistoryController.js',
 	'/js/app/CardsController.js',
 	'/js/app/app.js'
 ];
