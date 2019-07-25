@@ -66,8 +66,39 @@
         ;
 }
 
+:root {
+	--app-bg-color: #222b2d;
+	--app-color: #fff;
+	--cover-layer-color: #000;
+
+
+	--theme-default-card-bg-color: #4dc0f0;
+	--theme-default-card-bg-gradient-start: var(--theme-default-card-bg-color);
+	--theme-default-card-bg-gradient-end: #00a0f0;
+	--theme-default-card-shadow-color: #000;
+	--theme-defautl-card-border-color: #fff;
+
+	--toolbar-button-border-color: #2c393b;
+	--toolbar-button-bg-color: #000;
+	--toolbar-button-color: #fefefe;
+
+	--toolbar-button-color-active: #000;
+	--toolbar-button-color-focus: #333;
+	--toolbar-button-contrast-color-active: #008CAA;
+
+	--card-main-color: #fff;
+	--card-bg-color: var(--card-main-color);
+	--card-border-color: var(--card-main-color);
+	--card-color: var(--card-main-color);
+
+	--theme-offline-card-bg-color: #8bc34a;
+	--theme-offline-card-bg-gradient-start: var(--theme-offline-card-bg-color);
+	--theme-offline-card-bg-gradient-end: #4caf50;
+}
+
 html {
-    background-color: #222b2d;
+    background-color: var(--app-bg-color);
+	color: var(--app-color);
     margin: 0;
     padding: 0;
     /* height: 100%;
@@ -91,12 +122,13 @@ body {
     width: 0;
     clear: both;
 }
-.card {
-    background-color: #fff;
 
-    border: 10px solid #fff;
+.card {
+    background-color: var(--card-bg-color);
+
+    border: 10px solid var(--card-border-color);
     border-radius: 10px;
-    color: #fff;
+    color: var(--card-color);
     cursor: pointer;
     font-weight: 700;
     font-size: 30px;
@@ -178,8 +210,9 @@ body {
         -ms-transition: opacity 0.5s 0.4s,     -ms-transform 0.8s;
             transition: opacity 0.5s 0.4s,         transform 0.8s;
 }
+
 #CoverLayer {
-    background-color: #000;
+    background-color: var(--cover-layer-color);
     display: block;
     position: fixed;
     opacity: 0;
@@ -187,7 +220,6 @@ body {
     top: -9999px;
 }
 .show-in-big #CoverLayer {
-    background-color: #000;
     display: block;
     opacity: 0.5;
     height: 100vh;
@@ -208,15 +240,29 @@ body {
     opacity: 0.3;
 }
 */
+
 .card-side {
-    box-shadow: 0 0 3px #000 inset;
-    background: #4dc0f0; /* Old browsers */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4dc0f0), color-stop(100%,#00a0f0)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #4dc0f0 0%,#00a0f0 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #4dc0f0 0%,#00a0f0 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #4dc0f0 0%,#00a0f0 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #4dc0f0 0%,#00a0f0 100%); /* W3C */
-    border: 1px solid #fff;
+	--card-side-bg-color: var(--theme-default-card-bg-color);
+	--card-side-bg-gradient-start: var(--theme-default-card-bg-gradient-start);
+	--card-side-bg-gradient-end: var(--theme-default-card-bg-gradient-end);
+	--card-side-shadow-color: var(--theme-default-card-shadow-color);
+	--card-side-border-color: var(--theme-default-card-border-color);
+}
+
+.offline .card-side {
+	--card-side-bg-color: var(--theme-offline-card-bg-color);
+	--card-side-bg-gradient-start: var(--theme-offline-card-bg-gradient-start);
+	--card-side-bg-gradient-end: var(--theme-offline-card-bg-gradient-end);
+}
+.card-side {
+    box-shadow: 0 0 3px var(--card-side-shadow-color) inset;
+    background: var(--card-side-bg-color); /* Old browsers */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, var(--card-side-bg-gradient-start)), color-stop(100%, var(--card-side-bg-gradient-end))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, var(--card-side-bg-gradient-start) 0%, var(--card-side-bg-gradient-end) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, var(--card-side-bg-gradient-start) 0%, var(--card-side-bg-gradient-end) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, var(--card-side-bg-gradient-start) 0%, var(--card-side-bg-gradient-end) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, var(--card-side-bg-gradient-start) 0%, var(--card-side-bg-gradient-end) 100%); /* W3C */
+    border: 1px solid var(--card-side-border-color);
     font-family: 'FireSans';
     bottom: 0;
     height: 100%;
@@ -225,20 +271,11 @@ body {
     vertical-align: middle;
     width: 100%;
 
-    text-shadow: 0 0 1px #000;
-}
-
-.offline .card-side {
-    background: #8bc34a; /* Old browsers */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8bc34a), color-stop(100%,#4caf50)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #8bc34a 0%,#4caf50 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #8bc34a 0%,#4caf50 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #8bc34a 0%,#4caf50 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #8bc34a 0%,#4caf50 100%); /* W3C */
+    text-shadow: 0 0 1px var(--card-side-shadow-color);
 }
 
 .big-card .card-side {
-    text-shadow: 0 0 3px #000;
+    text-shadow: 0 0 3px var(--card-side-shadow-color);
 }
 .card-side img {
     width: 90%;
@@ -247,7 +284,10 @@ body {
 }
 
 #Toolbar {
-    background: #000;
+	--toolbar-bg-color: #000;
+}
+#Toolbar {
+    background: var(--toolbar-bg-color);
     position: fixed;
     bottom: 0;
     opacity: 0;
@@ -287,11 +327,29 @@ body {
     display: block;
     height: 0;
 }
+
+.toolbar-button:active {
+	--toolbar-button-bg-color: var(--toolbar-button-contrast-color-active);
+	--toolbar-button-color: var(--toolbar-button-color-active);
+}
+.active-standard #CardTypeSelectStandard,
+.active-tshirt #CardTypeSelectTshirt,
+.active-fibonacci #CardTypeSelectFibonacci {
+	--toolbar-button-color: var(--toolbar-button-contrast-color-active);
+	--toolbar-button-bg-color: var(--toolbar-button-color-active);
+}
+.active-standard #CardTypeSelectStandard:focus,
+.active-tshirt #CardTypeSelectTshirt:focus,
+.active-fibonacci #CardTypeSelectFibonacci:focus,
+.toolbar-button:focus {
+	--toolbar-button-color: var(--toolbar-button-contrast-color-active);
+	--toolbar-button-bg-color: var(--toolbar-button-color-focus);
+}
 .toolbar-button {
     border-top: 0;
     border-bottom: 0;
     border-left: 0;
-    border-right: 1px solid #2c393b;
+    border-right: 1px solid var(--toolbar-button-border-color);
     background-image: none;
     border-radius: 0;
     font-family: 'FireSans';
@@ -307,30 +365,12 @@ body {
     */
     flex: 1 100%;
 }
-.toolbar-button:first-child {
-}
 .toolbar-button:last-child {
     border-right: 0;
 }
 .toolbar-button {
-    background-color: #000;
-    color: #fefefe;
-}
-.toolbar-button:active {
-    color: #000;
-    background-color: #008CAA;
-}
-.active-standard #CardTypeSelectStandard,
-.active-tshirt #CardTypeSelectTshirt,
-.active-fibonacci #CardTypeSelectFibonacci {
-    color: #008CAA;
-    background-color: #000;
-}
-.active-standard #CardTypeSelectStandard:focus,
-.active-tshirt #CardTypeSelectTshirt:focus,
-.active-fibonacci #CardTypeSelectFibonacci:focus,
-.toolbar-button:focus {
-    background-color: #666;
+    background-color: var(--toolbar-button-bg-color);
+    color: var(--toolbar-button-color);
 }
 
 @media (max-height: 359px) {
