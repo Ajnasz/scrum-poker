@@ -1,7 +1,6 @@
 /*global self, caches, fetch*/
 
 var urlsToCache = [
-	// '/index.html',
 	'/offline.html',
 	'/style.css',
 	'/fonts/FiraSans-Regular.woff',
@@ -41,7 +40,7 @@ var urlsToCache = [
 ];
 
 
-var cacheName = 'scrumpoker-v1.0.16';
+var cacheName = 'scrumpoker-v1.0.19';
 
 self.addEventListener('activate', function (event) {
 	'use strict';
@@ -51,18 +50,20 @@ self.addEventListener('activate', function (event) {
 		caches.keys().then(function(cacheNames) {
 			return Promise.all(
 				cacheNames.map(function(cacheName) {
-					if (cacheWhitelist.indexOf(cacheName) === -1) {
+					if (!cacheWhitelist.includes(cacheName)) {
 						return caches.delete(cacheName);
 					}
+
+					return Promise.resolve();
 				})
 			);
-		}).then(self.clients.claim())
+		}).then(() => self.clients.claim())
 	);
 });
 self.addEventListener('install', function (e) {
 	'use strict';
 	e.waitUntil(caches.open(cacheName).then(function (cache) {
-		return cache.addAll(urlsToCache);
+		return cache.addAll(urlsToCache).catch();
 	}));
 }, false);
 
