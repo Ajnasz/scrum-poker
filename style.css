@@ -326,6 +326,12 @@ body {
     color: #008CAA;
     background-color: #000;
 }
+.active-standard #CardTypeSelectStandard:focus,
+.active-tshirt #CardTypeSelectTshirt:focus,
+.active-fibonacci #CardTypeSelectFibonacci:focus,
+.toolbar-button:focus {
+    background-color: #666;
+}
 
 @media (max-height: 359px) {
     .card {
