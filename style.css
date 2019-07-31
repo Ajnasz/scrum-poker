@@ -155,6 +155,12 @@ body {
 	          user-select: none; /* non-prefixed version, currently not supported by any browser */
 }
 
+.card.standard {
+    -webkit-transform: translateY(100vh) translateZ(0);
+        -ms-transform: translateY(100vh) translateZ(0);
+            transform: translateY(100vh) translateZ(0);
+}
+
 .card.standard.transforming {
     -webkit-transform: translateY(100vh) translateZ(0) translateX(-66vw);
         -ms-transform: translateY(100vh) translateZ(0) translateX(-66vw);
