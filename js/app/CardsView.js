@@ -8,7 +8,7 @@
             // BACK_CARD_CLASS_NAME = 'back',
             CARD_SIDE_CLASS_NAME = 'card-side',
             placeClickEnabled = true,
-            cardCache;
+            cardCache = new Map();
 
         function truthy(elem) {
             return elem ? true : false;
@@ -72,21 +72,21 @@
             element.appendChild(cardSide);
         }
 
-        function createCard(value) {
+        function createCard(cardSetName, value) {
             var card, html;
 
             html = this.cardValueToHTML(value);
 
-            if (!cardCache) {
-                card = createDiv([CARD_CLASS_NAME, SMALL_CARD_CLASS_NAME], [['value', value]], []);
+            if (!cardCache.has(cardSetName)) {
+                card = createDiv([cardSetName, CARD_CLASS_NAME, SMALL_CARD_CLASS_NAME], [['value', value]], []);
 
                 createCardSide(card, FRONT_CARD_CLASS_NAME);
                 // createCardSide(card, BACK_CARD_CLASS_NAME);
 
-                cardCache = card;
+                cardCache.set(cardSetName, card);
             }
 
-            card = cardCache.cloneNode(true);
+            card = cardCache.get(cardSetName).cloneNode(true);
             setElementData(card, 'value', value);
             card.firstChild.innerHTML = html;
 
@@ -98,7 +98,7 @@
         }
 
         function getTranslateVal(value) {
-			return value;
+            return value;
             // return (Math.floor(Math.random() * 10) % 2 ? '-' : '') + getRandomInt(value, value);
         }
 
@@ -189,14 +189,16 @@
             }
         };
 
-        this.addCards = function addCards(cards) {
+        this.addCards = function addCards(opts) {
             var place = this.byId(this.place),
                 width = place.offsetWidth,
-                height = place.offsetHeight;
+                height = place.offsetHeight,
+                cards = opts.cards,
+                cardSetName = opts.cardSetName;
 
             var fragment = document.createDocumentFragment();
 
-            cards.map(createCard.bind(this)).forEach(function (card, index) {
+            cards.map(createCard.bind(this, cardSetName)).forEach(function (card, index) {
                 var transform = getTransformCss(width, height);
 
                 transformCard(card, transform);

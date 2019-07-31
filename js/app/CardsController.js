@@ -14,7 +14,10 @@
                 cardSet = model.getStandard();
             }
 
-            return cardSet;
+            return {
+                cards: cardSet,
+                cardSetName: value,
+            };
         }
 
         this.setup = function () {
