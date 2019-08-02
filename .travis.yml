@@ -8,6 +8,7 @@ deploy:
     script: docker run --rm -v /etc/ssl/certs:/etc/ssl/certs:ro -e SERVER_URL="https://scm.koszti.hu" -e HOOK_JOB="scrum-poker" -e HOOK_TOKEN="$HOOK_TOKEN" -e CI_COMMIT_SHA="$TRAVIS_COMMIT" ajnasz/hook-deploy
     on:
       tag: true
+      all_branches: true
 
   - provider: script
     script: docker run --rm -v /etc/ssl/certs:/etc/ssl/certs:ro -e SERVER_URL="https://scm.koszti.hu" -e HOOK_JOB="scrum-poker-test" -e HOOK_TOKEN="$HOOK_TOKEN" -e CI_COMMIT_SHA="$TRAVIS_COMMIT" ajnasz/hook-deploy
