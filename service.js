@@ -40,7 +40,7 @@ var urlsToCache = [
 ];
 
 
-var cacheName = 'scrumpoker-v1.0.24';
+var cacheName = 'scrumpoker-v1.0.26';
 
 self.addEventListener('activate', function (event) {
 	'use strict';
@@ -83,10 +83,9 @@ function serveRightFromCache(event) {
 	});
 }
 
-function serveOnline(event, alias) {
-	'use strict';
-
-	return fetch(event.request, {cache: 'no-cache'}).catch(function() {
+function serveOnline(event, alias = null) {
+	return fetch(event.request, {cache: 'no-cache'}).catch(function(err) {
+		if (!alias) return Promise.reject(err);
 		return caches.open(cacheName).then(function (cache) {
 			return cache.match(alias || event.request);
 		});
@@ -95,8 +94,11 @@ function serveOnline(event, alias) {
 
 self.addEventListener('fetch', function (event) {
 	'use strict';
+	const url = new URL(event.request.url);
 
-	if (new URL(event.request.url).pathname === '/') {
+	if (url.hostname === 'localhost') {
+		event.respondWith(serveOnline(event));
+	} else if (url.pathname === '/') {
 		event.respondWith(serveOnline(event, '/offline.html'));
 	} else {
 		event.respondWith(serveRightFromCache(event));
