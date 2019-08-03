@@ -140,10 +140,6 @@
             } else {
                 card.classList.remove('transforming');
             }
-            // card.style.WebkitTransform = transform;
-            // card.style.MozTransform = transform;
-            // card.style.MsTransform = transform;
-            // card.style.transform = transform;
         }
 
         this.removeCards = function removeCards(callback) {
@@ -177,12 +173,14 @@
             }
 
             if (children.length) {
-                children.forEach(function (card) {
+                children.forEach(function (card, index) {
+                setTimeout(function () {
                     if (card.nodeType === 1) {
                         markCardForRemove(card);
                     } else {
                         realCardRemove(card);
                     }
+                }, (index + 1) * 45 );
                 });
             } else {
                 callback();
@@ -250,3 +248,5 @@
         };
     })));
 }(this.stampit, this.spoker || {}));
+
+// vi:expandtab
