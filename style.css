@@ -1,49 +1,49 @@
 @-webkit-keyframes slide-card-down {
-	from {
-		opacity: 0;
-		-webkit-transform: translateY(-100vh);
-	}
+    from {
+        opacity: 0;
+        -webkit-transform: translateY(-100vh);
+    }
 
-	to {
-		opacity: 1;
-		-webkit-transform: translateY(0);
-	}
+    to {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
 }
 
 @keyframes slide-card-down {
-	from {
-		opacity: 0;
-		transform: translateY(-100vh);
-	}
+    from {
+        opacity: 0;
+        transform: translateY(-100vh);
+    }
 
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @-webkit-keyframes slide-card-up {
-	from {
-		opacity: 1;
-		-webkit-transform: translateY(0);
-	}
+    from {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
 
-	to {
-		opacity: 0;
-		-webkit-transform: translateY(-100vh);
-	}
+    to {
+        opacity: 0;
+        -webkit-transform: translateY(-100vh);
+    }
 }
 
 @keyframes slide-card-up {
-	from {
-		opacity: 1;
-		transform: translateY(0);
-	}
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
-	to {
-		opacity: 0;
-		transform: translateY(-100vh);
-	}
+    to {
+        opacity: 0;
+        transform: translateY(-100vh);
+    }
 }
 
 @font-face {
@@ -67,40 +67,40 @@
 }
 
 :root {
-	--app-bg-color: #222b2d;
-	--app-color: #fff;
-	--cover-layer-color: #000;
+    --app-bg-color: #222b2d;
+    --app-color: #fff;
+    --cover-layer-color: #000;
 
 
-	--theme-default-card-bg-color: #4dc0f0;
-	--theme-default-card-bg-gradient-start: var(--theme-default-card-bg-color);
-	--theme-default-card-bg-gradient-end: #00a0f0;
-	--theme-default-card-shadow-color: #000;
-	--theme-default-card-side-shadow-color: #000;
-	--theme-defautl-card-border-color: #fff;
+    --theme-default-card-bg-color: #4dc0f0;
+    --theme-default-card-bg-gradient-start: var(--theme-default-card-bg-color);
+    --theme-default-card-bg-gradient-end: #00a0f0;
+    --theme-default-card-shadow-color: #000;
+    --theme-default-card-side-shadow-color: #000;
+    --theme-defautl-card-border-color: #fff;
 
-	--toolbar-button-border-color: #2c393b;
-	--toolbar-button-bg-color: #000;
-	--toolbar-button-color: #fefefe;
+    --toolbar-button-border-color: #2c393b;
+    --toolbar-button-bg-color: #000;
+    --toolbar-button-color: #fefefe;
 
-	--toolbar-button-color-active: #000;
-	--toolbar-button-color-focus: #333;
-	--toolbar-button-contrast-color-active: #008CAA;
+    --toolbar-button-color-active: #000;
+    --toolbar-button-color-focus: #333;
+    --toolbar-button-contrast-color-active: #008CAA;
 
-	--card-main-color: #fff;
-	--card-bg-color: var(--card-main-color);
-	--card-border-color: var(--card-main-color);
-	--card-color: var(--card-main-color);
-	--card-shadow-color: var(--theme-default-card-shadow-color);
+    --card-main-color: #fff;
+    --card-bg-color: var(--card-main-color);
+    --card-border-color: var(--card-main-color);
+    --card-color: var(--card-main-color);
+    --card-shadow-color: var(--theme-default-card-shadow-color);
 
-	--theme-offline-card-bg-color: #8bc34a;
-	--theme-offline-card-bg-gradient-start: var(--theme-offline-card-bg-color);
-	--theme-offline-card-bg-gradient-end: #4caf50;
+    --theme-offline-card-bg-color: #8bc34a;
+    --theme-offline-card-bg-gradient-start: var(--theme-offline-card-bg-color);
+    --theme-offline-card-bg-gradient-end: #4caf50;
 }
 
 html {
     background-color: var(--app-bg-color);
-	color: var(--app-color);
+    color: var(--app-color);
     margin: 0;
     padding: 0;
     /* height: 100%;
@@ -146,19 +146,19 @@ body {
             transform: translateZ(0);
 }
 .card {
-	height: 100vh;
-	line-height: 150px;
-	padding: 0;
-	position: relative;
-	width: 100px;
-	z-index: 2;
+    height: 100vh;
+    line-height: 150px;
+    padding: 0;
+    position: relative;
+    width: 100px;
+    z-index: 2;
 
-	-webkit-touch-callout: none; /* iOS Safari */
-	  -webkit-user-select: none; /* Chrome/Safari/Opera */
-	   -khtml-user-select: none; /* Konqueror */
-	     -moz-user-select: none; /* Firefox */
-	      -ms-user-select: none; /* IE/Edge */
-	          user-select: none; /* non-prefixed version, currently not supported by any browser */
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Chrome/Safari/Opera */
+       -khtml-user-select: none; /* Konqueror */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* IE/Edge */
+              user-select: none; /* non-prefixed version, currently not supported by any browser */
 }
 
 .card.transforming {
@@ -193,32 +193,32 @@ body {
 
     border-width: 20px;
 
-	-webkit-transform: translateY(-100vh);
-	    -ms-transform: translateY(-100vh);
-	        transform: translateY(-100vh);
+    -webkit-transform: translateY(-100vh);
+        -ms-transform: translateY(-100vh);
+            transform: translateY(-100vh);
 }
 
 .animate-big .big-card {
-	opacity: 0;
+    opacity: 0;
 
-	-webkit-transform: translateY(-100vh);
-	    -ms-transform: translateY(-100vh);
-	        transform: translateY(-100vh);
+    -webkit-transform: translateY(-100vh);
+        -ms-transform: translateY(-100vh);
+            transform: translateY(-100vh);
 
-	-webkit-animation: 0.5s slide-card-up;
-	    -ms-animation: 0.5s slide-card-up;
-	        animation: 0.5s slide-card-up;
+    -webkit-animation: 0.5s slide-card-up;
+        -ms-animation: 0.5s slide-card-up;
+            animation: 0.5s slide-card-up;
 }
 
 .show-in-big .big-card {
-	opacity: 1;
-	-webkit-transform: translateY(0);
-	    -ms-transform: translateY(0);
-	        transform: translateY(0);
+    opacity: 1;
+    -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+            transform: translateY(0);
 
-	-webkit-animation: 0.5s slide-card-down;
-	    -ms-animation: 0.5s slide-card-down;
-	        animation: 0.5s slide-card-down;
+    -webkit-animation: 0.5s slide-card-down;
+        -ms-animation: 0.5s slide-card-down;
+            animation: 0.5s slide-card-down;
 }
 .small-card {
     margin: 10px auto;
@@ -259,17 +259,17 @@ body {
 */
 
 .card-side {
-	--card-side-bg-color: var(--theme-default-card-bg-color);
-	--card-side-bg-gradient-start: var(--theme-default-card-bg-gradient-start);
-	--card-side-bg-gradient-end: var(--theme-default-card-bg-gradient-end);
-	--card-side-shadow-color: var(--theme-default-card-side-shadow-color);
-	--card-side-border-color: var(--theme-default-card-border-color);
+    --card-side-bg-color: var(--theme-default-card-bg-color);
+    --card-side-bg-gradient-start: var(--theme-default-card-bg-gradient-start);
+    --card-side-bg-gradient-end: var(--theme-default-card-bg-gradient-end);
+    --card-side-shadow-color: var(--theme-default-card-side-shadow-color);
+    --card-side-border-color: var(--theme-default-card-border-color);
 }
 
 .offline .card-side {
-	--card-side-bg-color: var(--theme-offline-card-bg-color);
-	--card-side-bg-gradient-start: var(--theme-offline-card-bg-gradient-start);
-	--card-side-bg-gradient-end: var(--theme-offline-card-bg-gradient-end);
+    --card-side-bg-color: var(--theme-offline-card-bg-color);
+    --card-side-bg-gradient-start: var(--theme-offline-card-bg-gradient-start);
+    --card-side-bg-gradient-end: var(--theme-offline-card-bg-gradient-end);
 }
 .card-side {
     box-shadow: 0 0 3px var(--card-side-shadow-color) inset;
@@ -301,7 +301,7 @@ body {
 }
 
 #Toolbar {
-	--toolbar-bg-color: #000;
+    --toolbar-bg-color: #000;
 }
 #Toolbar {
     background: var(--toolbar-bg-color);
@@ -346,21 +346,21 @@ body {
 }
 
 .toolbar-button:active {
-	--toolbar-button-bg-color: var(--toolbar-button-contrast-color-active);
-	--toolbar-button-color: var(--toolbar-button-color-active);
+    --toolbar-button-bg-color: var(--toolbar-button-contrast-color-active);
+    --toolbar-button-color: var(--toolbar-button-color-active);
 }
 .active-standard #CardTypeSelectStandard,
 .active-tshirt #CardTypeSelectTshirt,
 .active-fibonacci #CardTypeSelectFibonacci {
-	--toolbar-button-color: var(--toolbar-button-contrast-color-active);
-	--toolbar-button-bg-color: var(--toolbar-button-color-active);
+    --toolbar-button-color: var(--toolbar-button-contrast-color-active);
+    --toolbar-button-bg-color: var(--toolbar-button-color-active);
 }
 .active-standard #CardTypeSelectStandard:focus,
 .active-tshirt #CardTypeSelectTshirt:focus,
 .active-fibonacci #CardTypeSelectFibonacci:focus,
 .toolbar-button:focus {
-	--toolbar-button-color: var(--toolbar-button-contrast-color-active);
-	--toolbar-button-bg-color: var(--toolbar-button-color-focus);
+    --toolbar-button-color: var(--toolbar-button-contrast-color-active);
+    --toolbar-button-bg-color: var(--toolbar-button-color-focus);
 }
 .toolbar-button {
     border-top: 0;
