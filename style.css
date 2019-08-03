@@ -76,6 +76,7 @@
 	--theme-default-card-bg-gradient-start: var(--theme-default-card-bg-color);
 	--theme-default-card-bg-gradient-end: #00a0f0;
 	--theme-default-card-shadow-color: #000;
+	--theme-default-card-side-shadow-color: #000;
 	--theme-defautl-card-border-color: #fff;
 
 	--toolbar-button-border-color: #2c393b;
@@ -90,6 +91,7 @@
 	--card-bg-color: var(--card-main-color);
 	--card-border-color: var(--card-main-color);
 	--card-color: var(--card-main-color);
+	--card-shadow-color: var(--theme-default-card-shadow-color);
 
 	--theme-offline-card-bg-color: #8bc34a;
 	--theme-offline-card-bg-gradient-start: var(--theme-offline-card-bg-color);
@@ -132,6 +134,7 @@ body {
 
     border: 10px solid var(--card-border-color);
     border-radius: 10px;
+    box-shadow: 0 0 3px 1px var(--card-shadow-color);
     color: var(--card-color);
     cursor: pointer;
     font-weight: 700;
@@ -264,7 +267,7 @@ body {
 	--card-side-bg-color: var(--theme-default-card-bg-color);
 	--card-side-bg-gradient-start: var(--theme-default-card-bg-gradient-start);
 	--card-side-bg-gradient-end: var(--theme-default-card-bg-gradient-end);
-	--card-side-shadow-color: var(--theme-default-card-shadow-color);
+	--card-side-shadow-color: var(--theme-default-card-side-shadow-color);
 	--card-side-border-color: var(--theme-default-card-border-color);
 }
 
