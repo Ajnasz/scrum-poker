@@ -162,32 +162,27 @@ body {
 }
 
 .card.transforming {
-    -webkit-transform: translateY(100vh) translateZ(0);
-        -ms-transform: translateY(100vh) translateZ(0);
-            transform: translateY(100vh) translateZ(0);
+    -webkit-transform: translateY(110vh) translateZ(0);
+        -ms-transform: translateY(110vh) translateZ(0);
+            transform: translateY(110vh) translateZ(0);
 }
 
 .card.standard.transforming {
-    -webkit-transform: translateY(100vh) translateZ(0) translateX(-66vw);
-        -ms-transform: translateY(100vh) translateZ(0) translateX(-66vw);
-            transform: translateY(100vh) translateZ(0) translateX(-66vw);
+    -webkit-transform: translateY(110vh) translateZ(0) translateX(-66vw);
+        -ms-transform: translateY(110vh) translateZ(0) translateX(-66vw);
+            transform: translateY(110vh) translateZ(0) translateX(-66vw);
 }
 .card.tshirt.transforming {
-    -webkit-transform: translateY(100vh) translateZ(0) translateX(0vw);
-        -ms-transform: translateY(100vh) translateZ(0) translateX(0vw);
-            transform: translateY(100vh) translateZ(0) translateX(0vw);
+    -webkit-transform: translateY(110vh) translateZ(0) translateX(0vw);
+        -ms-transform: translateY(110vh) translateZ(0) translateX(0vw);
+            transform: translateY(110vh) translateZ(0) translateX(0vw);
 }
 .card.fibonacci.transforming {
-    -webkit-transform: translateY(100vh) translateZ(0) translateX(66vw);
-        -ms-transform: translateY(100vh) translateZ(0) translateX(66vw);
-            transform: translateY(100vh) translateZ(0) translateX(66vw);
+    -webkit-transform: translateY(110vh) translateZ(0) translateX(66vw);
+        -ms-transform: translateY(110vh) translateZ(0) translateX(66vw);
+            transform: translateY(110vh) translateZ(0) translateX(66vw);
 }
 
-.card.remove {
-    -webkit-transform: translateX(-100vw) translateZ(0);
-        -ms-transform: translateX(-100vw) translateZ(0);
-            transform: translateX(-100vw) translateZ(0);
-}
 .big-card {
     position: fixed;
     top: 50%;
