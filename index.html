@@ -60,12 +60,11 @@
 			function addScripts(scripts) {
 
 				if (scripts.length) {
-					var item = scripts.shift();
-
+					var item = scripts[0];
 					if (Array.isArray(item)) {
-						Promise.all(item.map(addScript)).then(addScripts.bind(null, scripts));
+						Promise.all(item.map(addScript)).then(addScripts.bind(null, scripts.slice(1)));
 					} else {
-						addScript(item).then(addScripts.bind(null, scripts)).catch(function (e) {
+						addScript(item).then(addScripts.bind(null, scripts.slice(1))).catch(function (e) {
 							throw e;
 						});
 					}
