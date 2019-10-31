@@ -86,6 +86,7 @@ function serveRightFromCache(event) {
 function serveOnline(event, alias = null) {
 	return fetch(event.request, {cache: 'no-cache'}).catch(function(err) {
 		if (!alias) return Promise.reject(err);
+
 		return caches.open(cacheName).then(function (cache) {
 			return cache.match(alias || event.request);
 		});
@@ -94,7 +95,7 @@ function serveOnline(event, alias = null) {
 
 self.addEventListener('fetch', function (event) {
 	'use strict';
-	const url = new URL(event.request.url);
+	var url = new URL(event.request.url);
 
 	if (url.hostname === 'localhost') {
 		event.respondWith(serveOnline(event));
